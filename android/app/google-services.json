@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "886844119186",
+    "project_id": "meramaahi-7bec9",
+    "storage_bucket": "meramaahi-7bec9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886844119186:android:d19f9d77f1fe79c9a8ee4b",
+        "android_client_info": {
+          "package_name": "com.example.mere_maahi_dummy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeML76lCXZESzaqIAUbuIzTFSjDH8OwVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
