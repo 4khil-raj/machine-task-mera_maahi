@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mere_maahi_dummy/Screens/Account/editprofile.dart';
+import 'package:mere_maahi_dummy/Screens/OnboardingScreen/onboardingScreen.dart';
 import 'package:mere_maahi_dummy/Screens/SplashScreen/splash_service.dart';
 import 'package:mere_maahi_dummy/auth/sign_in/signIn_with_email.dart';
 
@@ -16,6 +18,39 @@ class AccountScreen extends StatefulWidget {
   State<AccountScreen> createState() => _AccountScreenState();
 }
 
+Show_DiloagBox(context) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Are you sure ?'),
+          content: const Text('Are sure you want to log out'),
+          actions: [
+            TextButton(
+                style: TextButton.styleFrom(
+                    textStyle: Theme.of(context).textTheme.labelMedium),
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+
+                  //After SignOut we easily Navigate to LoginScreen
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (builder) => const OnboardingThreeScreen()));
+                },
+                child: const Text('Yes')),
+            TextButton(
+                style: TextButton.styleFrom(
+                    textStyle: Theme.of(context).textTheme.labelMedium),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('No'))
+          ],
+        );
+      });
+}
+
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
@@ -23,14 +58,6 @@ class _AccountScreenState extends State<AccountScreen> {
       backgroundColor: Color.fromARGB(255, 230, 236, 231),
       appBar: AppBar(
         title: Text('Profile'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (ctx) => SignInScreen()));
-              },
-              icon: Icon(Icons.logout))
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -196,6 +223,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         ),
                       ),
                       ListTile(
+                        onTap: () => Show_DiloagBox(context),
                         trailing: Icon(Icons.arrow_forward_ios_rounded),
                         title: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
