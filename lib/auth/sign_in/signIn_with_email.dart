@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
 import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/forgotPassword_screen.dart';
 import 'package:mere_maahi_dummy/auth/sign_up/signUp_with_email.dart';
@@ -229,11 +230,11 @@ class _SignInScreenState extends State<SignInScreen> {
     return InkWell(
       onTap: () => setState(() {
         _isLoading = true;
-        Future<void>.delayed(const Duration(seconds: 2), () {
+        Future<void>.delayed(const Duration(seconds: 3), () {
           setState(() {
             _isLoading = false;
           });
-          _LogIn(context);
+          LogIn(context);
         });
       }),
       child: _isLoading
@@ -257,7 +258,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   ///LogIn function
-  void _LogIn(context) async {
+  void LogIn(context) async {
     String email = _emailTextController.text;
     String password = _passwordTextController.text;
     FirebaseAuth _auth = FirebaseAuth.instance;
@@ -266,15 +267,15 @@ class _SignInScreenState extends State<SignInScreen> {
         email: email,
         password: password,
       );
+
       if (userCredential.user != null) {
-        print("User is successfully logged in");
+        await CurrentUserRepo().fetchuserdatas();
         showSnackBar(context, "User is successfully logged in");
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => MainScreen()),
-        );
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (home) => const MainScreen()),
+            (route) => false);
       } else {
-        print("Some error happened in Log In");
         showSnackBar(context, "Some error happened in Log In");
       }
     } on FirebaseAuthException catch (e) {
@@ -288,7 +289,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('ok'))
+                  child: const Text('ok'))
             ],
           );
         },

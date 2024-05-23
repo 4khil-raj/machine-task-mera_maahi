@@ -15,11 +15,22 @@ class UserTile extends StatelessWidget {
     print(text);
     return GestureDetector(
         onTap: onTap,
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage(profile),
-          ),
-          title: Text(text),
+        child: Column(
+          children: [
+            Divider(),
+            ListTile(
+              leading: CircleAvatar(
+                radius: 30,
+                backgroundImage: NetworkImage(profile),
+              ),
+              title: Text(
+                text.toUpperCase(),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              ),
+            ),
+            Divider()
+          ],
         ));
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
 import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
 
 import '../OnboardingScreen/onboardingScreen.dart';
@@ -12,7 +13,7 @@ class SplashServices {
     final auth = FirebaseAuth.instance;
 
     final user = auth.currentUser;
-
+    await CurrentUserRepo().fetchuserdatas();
     if (user != null) {
       userId = user.email ?? '';
 

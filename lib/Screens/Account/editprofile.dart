@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers, use_build_context_synchronously, prefer_final_fields
 
 import 'dart:io';
 
@@ -10,7 +10,6 @@ import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:mere_maahi_dummy/Screens/Account/accountScreen.dart';
-import 'package:mere_maahi_dummy/Screens/SplashScreen/splash_service.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/button.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/widgets/form_field.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -105,13 +104,13 @@ class _EditProfileState extends State<EditProfile> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          username?.first,
+                          'Mariya',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w600),
                         ),
                       ),
                       Text(
-                        userId!,
+                        'mariya@gmail.com',
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.w500),
                       )

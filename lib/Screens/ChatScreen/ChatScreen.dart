@@ -109,24 +109,24 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 )),
             const SizedBox(height: 15),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: Text(
-                  'Activities',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontFamily: 'Sk-Modernist',
-                    fontWeight: FontWeight.w700,
-                    height: 0.08,
-                  ),
-                ),
-              ),
-            ),
+            // const Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: Padding(
+            //     padding: EdgeInsets.only(left: 10),
+            //     child: Text(
+            //       'Activities',
+            //       style: TextStyle(
+            //         color: Colors.black,
+            //         fontSize: 18,
+            //         fontFamily: 'Sk-Modernist',
+            //         fontWeight: FontWeight.w700,
+            //         height: 0.08,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             const SizedBox(height: 15),
-            _buildUserProfileList(context),
+            // _buildUserProfileList(context),
             const SizedBox(height: 15),
             const Align(
               alignment: Alignment.centerLeft,
@@ -168,98 +168,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   );
                 },
               ),
-            )
-
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 10),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Container(
-            //         height: 56,
-            //         width: 56,
-            //         padding: const EdgeInsets.all(2),
-            //         child: CustomImageView(
-            //           imagePath: ImageConstant.imgPhoto48x48,
-            //           height: 48,
-            //           width: 48,
-            //           radius: BorderRadius.circular(
-            //             24,
-            //           ),
-            //           alignment: Alignment.center,
-            //         ),
-            //       ),
-            //       const Padding(
-            //         padding: EdgeInsets.only(
-            //           left: 10,
-            //           top: 9,
-            //           bottom: 9,
-            //         ),
-            //         child: Column(
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: [
-            //             Text(
-            //               "Emelie",
-            //             ),
-            //             SizedBox(height: 2),
-            //             Text(
-            //               "Sticker 😍",
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //       const Spacer(),
-            //       Padding(
-            //         padding: const EdgeInsets.only(
-            //           top: 11,
-            //           bottom: 6,
-            //         ),
-            //         child: Column(
-            //           children: [
-            //             const Text(
-            //               "23 min",
-            //             ),
-            //             const SizedBox(height: 3),
-            //             Align(
-            //               alignment: Alignment.centerRight,
-            //               child: Container(
-            //                   width: 20,
-            //                   padding: const EdgeInsets.symmetric(
-            //                     vertical: 2,
-            //                   ),
-            //                   child: Container(
-            //                     width: 50,
-            //                     height: 20,
-            //                     decoration: const ShapeDecoration(
-            //                       color: Color(0xFFE94057),
-            //                       shape: OvalBorder(),
-            //                     ),
-            //                     child: const Center(
-            //                       child: Text(
-            //                         '1',
-            //                         textAlign: TextAlign.center,
-            //                         style: TextStyle(
-            //                           color: Colors.white,
-            //                           fontSize: 12,
-            //                           fontFamily: 'Sk-Modernist',
-            //                           fontWeight: FontWeight.w700,
-            //                           height: 0.12,
-            //                         ),
-            //                       ),
-            //                     ),
-            //                   )),
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            ,
+            ),
             SizedBox(
               height: 10,
             ),
-            // _buildChatMessageList(context)
           ])),
     ));
   }
@@ -268,13 +180,14 @@ class _ChatScreenState extends State<ChatScreen> {
       Map<String, dynamic> userData, BuildContext context) {
     if (userData['email'] != userId) {
       return UserTile(
-        text: userData['email'],
+        text: userData['username'],
         profile: userData['userProfile'],
         onTap: () {
-          print(userId);
           customNavPush(
               context,
               ChatPage(
+                name: userData['username'],
+                profileImage: userData['userProfile'],
                 receiverID: userData['email'],
                 receiverEmail: userData['email'],
               ));
@@ -283,133 +196,6 @@ class _ChatScreenState extends State<ChatScreen> {
     } else {
       return const SizedBox();
     }
-  }
-
-  ///ChatMessage List
-
-  Widget _buildChatMessageList(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: ListView.separated(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Container(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomImageView(
-                      imagePath: ImageConstant.imgPhoto16,
-                      height: 48,
-                      width: 48,
-                      radius: BorderRadius.circular(
-                        24,
-                      ),
-                      margin: const EdgeInsets.only(bottom: 1),
-                    ),
-                    Expanded(
-                        child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 14, top: 7, bottom: 1),
-                      child: Column(
-                        children: [
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Abigail',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontFamily: 'Sk-Modernist',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0.11,
-                                ),
-                              ),
-                              Text(
-                                '27 min',
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  color: Color(0xFFADAFBB),
-                                  fontSize: 12,
-                                  fontFamily: 'Sk-Modernist',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0.12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 1,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.only(
-                                  top: 17,
-                                ),
-                                child: Text(
-                                  'Typing..',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontFamily: 'Sk-Modernist',
-                                    fontWeight: FontWeight.w400,
-                                    height: 0.11,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Container(
-                                  width: 20,
-                                  height: 20,
-                                  padding: const EdgeInsets.only(top: 8),
-                                  decoration: const ShapeDecoration(
-                                    color: Color(0xFFE94057),
-                                    shape: OvalBorder(),
-                                  ),
-                                  child: const Text(
-                                    '2',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontFamily: 'Sk-Modernist',
-                                      fontWeight: FontWeight.w700,
-                                      height: 0.12,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ))
-                  ],
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2.5),
-                child: SizedBox(
-                  width: 300,
-                  child: Divider(
-                    height: 1,
-                    thickness: 1,
-                    color: Colors.grey.shade200,
-                  ),
-                ),
-              );
-            },
-            itemCount: 5),
-      ),
-    );
   }
 
   ///Profile List

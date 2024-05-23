@@ -8,6 +8,8 @@ import '../../core/utils/image_constant.dart';
 import "../Im_and_interests/im.dart";
 import 'Religion/religionScreen.dart';
 
+String? selectedLabel1;
+
 class ThisProfile extends StatefulWidget {
   const ThisProfile({super.key});
 
@@ -16,7 +18,6 @@ class ThisProfile extends StatefulWidget {
 }
 
 class _ThisProfileState extends State<ThisProfile> {
-  String? selectedLabel;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,8 +65,8 @@ class _ThisProfileState extends State<ThisProfile> {
               Center(
                 child: InkWell(
                   onTap: () {
-                    if (selectedLabel != null) {
-                      Get.to(DOBPickerScreen(),
+                    if (selectedLabel1 != null) {
+                      Get.to(DropdownScreen(),
                           transition: Transition.rightToLeftWithFade);
                     }
                     // Navigator.pushAndRemoveUntil(
@@ -116,10 +117,10 @@ class _ThisProfileState extends State<ThisProfile> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'Myself',
-                isSelected: selectedLabel == 'Myself',
+                isSelected: selectedLabel1 == 'Myself',
                 onSelect: () {
                   setState(() {
-                    selectedLabel = 'Myself';
+                    selectedLabel1 = 'Myself';
                   });
                 },
               ),
@@ -127,10 +128,10 @@ class _ThisProfileState extends State<ThisProfile> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'My Son',
-                isSelected: selectedLabel == 'My Son',
+                isSelected: selectedLabel1 == 'My Son',
                 onSelect: () {
                   setState(() {
-                    selectedLabel = 'My Son';
+                    selectedLabel1 = 'My Son';
                   });
                 },
               ),
@@ -143,10 +144,10 @@ class _ThisProfileState extends State<ThisProfile> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'My Daughter',
-                isSelected: selectedLabel == 'My Daughter',
+                isSelected: selectedLabel1 == 'My Daughter',
                 onSelect: () {
                   setState(() {
-                    selectedLabel = 'My Daughter';
+                    selectedLabel1 = 'My Daughter';
                   });
                 },
               ),
@@ -154,10 +155,10 @@ class _ThisProfileState extends State<ThisProfile> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'My Sister',
-                isSelected: selectedLabel == 'My Sister',
+                isSelected: selectedLabel1 == 'My Sister',
                 onSelect: () {
                   setState(() {
-                    selectedLabel = 'My Sister';
+                    selectedLabel1 = 'My Sister';
                   });
                 },
               ),
@@ -170,10 +171,10 @@ class _ThisProfileState extends State<ThisProfile> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'My Friends',
-                isSelected: selectedLabel == 'My Friends',
+                isSelected: selectedLabel1 == 'My Friends',
                 onSelect: () {
                   setState(() {
-                    selectedLabel = 'My Friends';
+                    selectedLabel1 = 'My Friends';
                   });
                 },
               ),
@@ -181,10 +182,10 @@ class _ThisProfileState extends State<ThisProfile> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'My Relative',
-                isSelected: selectedLabel == 'My Relative',
+                isSelected: selectedLabel1 == 'My Relative',
                 onSelect: () {
                   setState(() {
-                    selectedLabel = 'My Relative';
+                    selectedLabel1 = 'My Relative';
                   });
                 },
               ),

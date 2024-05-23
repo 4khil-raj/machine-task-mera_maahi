@@ -1,8 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
 import 'package:mere_maahi_dummy/core/app_export.dart';
 
 class SignInWithEmail extends StatefulWidget {
@@ -17,16 +21,15 @@ TextEditingController _passwordController = TextEditingController();
 GlobalKey<FormState> _scaffoldKey = GlobalKey<FormState>();
 bool isObscure = true;
 
-
 class _SignInWithEmailState extends State<SignInWithEmail> {
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _scaffoldKey.currentState?.dispose();
-  }
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   super.dispose();
+  //   _emailController.dispose();
+  //   _passwordController.dispose();
+  //   _scaffoldKey.currentState?.dispose();
+  // }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -393,34 +396,93 @@ class _SignInWithEmailState extends State<SignInWithEmail> {
     );
   }
 
+  bool Loading = true;
+
   ///SignIn Button
   Widget _buildSignInButton() {
-    return Container(
-      width: 327,
-      height: 56,
-      clipBehavior: Clip.antiAlias,
-      decoration: ShapeDecoration(
-        color: const Color(0xFFEC5151),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(32),
-        ),
-      ),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xFFEC5151),
-        ),
-        onPressed: () {},
-        child: const Text(
-          'Sign In',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontFamily: 'Arimo',
-            fontWeight: FontWeight.w700,
-            height: 0,
-          ),
-        ),
-      ),
-    );
+    return Loading
+        ? Container(
+            width: 327,
+            height: 56,
+            clipBehavior: Clip.antiAlias,
+            decoration: ShapeDecoration(
+              color: const Color(0xFFEC5151),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(32),
+              ),
+            ),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFEC5151),
+              ),
+              onPressed: () async {
+                setState(() {
+                  Loading = false;
+                });
+                await Future.delayed(Duration(seconds: 2));
+                setState(() {
+                  Loading = true;
+                });
+                LogIn(context);
+                _emailController.clear();
+                _passwordController.clear();
+              },
+              child: const Text(
+                'Sign In',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: 'Arimo',
+                  fontWeight: FontWeight.w700,
+                  height: 0,
+                ),
+              ),
+            ),
+          )
+        : CircularProgressIndicator(
+            color: Colors.red,
+          );
+  }
+
+  void LogIn(context) async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (userCredential.user != null) {
+        showSnackBar(context, "User is successfully logged in");
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MainScreen()),
+        );
+      } else {
+        showSnackBar(context, "Some error happened in Log In");
+      }
+    } on FirebaseAuthException catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(e.message.toString()),
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('ok'))
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  void showSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

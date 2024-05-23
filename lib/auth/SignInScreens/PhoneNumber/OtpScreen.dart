@@ -1,9 +1,13 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mere_maahi_dummy/auth/SignInScreens/PhoneNumber/profile_build.dart';
 // import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:pinput/pinput.dart';
+
+var otpid;
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -23,6 +27,7 @@ class _OtpScreenState extends State<OtpScreen> {
     super.initState();
     startTimer();
   }
+
   void startTimer() {
     _timerActive = true;
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -37,30 +42,35 @@ class _OtpScreenState extends State<OtpScreen> {
       });
     });
   }
+
+  final otpcontroller = TextEditingController();
   @override
-    Widget build(BuildContext context) {
-      final defaultPinTheme = PinTheme(
-        width: 56,
-        height: 56,
-        textStyle:  const TextStyle(
-            fontSize: 20,
-            color: Color.fromRGBO(234, 239, 243, 1),
-            fontWeight: FontWeight.w600),
-        decoration: BoxDecoration(
-          border: Border.all(color: const Color(0xFFE8E6EA)),
-          borderRadius: BorderRadius.circular(15),
-        ),
-      );
-
-      final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-        border: Border.all(color: const Color(0xFFE94057),),
+  Widget build(BuildContext context) {
+    final defaultPinTheme = PinTheme(
+      width: 56,
+      height: 56,
+      textStyle: const TextStyle(
+          fontSize: 20,
+          color: Color.fromRGBO(234, 239, 243, 1),
+          fontWeight: FontWeight.w600),
+      decoration: BoxDecoration(
+        border: Border.all(color: const Color(0xFFE8E6EA)),
         borderRadius: BorderRadius.circular(15),
-      );
+      ),
+    );
 
-      final submittedPinTheme = defaultPinTheme.copyWith(
-        decoration: defaultPinTheme.decoration?.copyWith(
-          color: const Color(0xFFE94057),
-        ),);
+    final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+      border: Border.all(
+        color: const Color(0xFFE94057),
+      ),
+      borderRadius: BorderRadius.circular(15),
+    );
+
+    final submittedPinTheme = defaultPinTheme.copyWith(
+      decoration: defaultPinTheme.decoration?.copyWith(
+        color: const Color(0xFFE94057),
+      ),
+    );
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -79,7 +89,7 @@ class _OtpScreenState extends State<OtpScreen> {
             },
             icon: const Icon(
               Icons.arrow_back_ios_rounded,
-              color:Color(0xFFE94057),
+              color: Color(0xFFE94057),
             ),
           ),
         ),
@@ -120,54 +130,77 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
               ),
               const SizedBox(
-                height:20,
+                height: 20,
               ),
               Pinput(
-                length: 4,
-                defaultPinTheme: defaultPinTheme,
-                focusedPinTheme: focusedPinTheme,
-                submittedPinTheme: submittedPinTheme,
-
-                showCursor: true,
-                onCompleted: (pin) => print(pin),
-              ),
+                  controller: otpcontroller,
+                  length: 6,
+                  defaultPinTheme: defaultPinTheme,
+                  focusedPinTheme: focusedPinTheme,
+                  submittedPinTheme: submittedPinTheme,
+                  showCursor: true,
+                  onCompleted: (d) {
+                    PhoneAuthCredential credential =
+                        PhoneAuthProvider.credential(
+                            verificationId: otpid, smsCode: otpcontroller.text);
+                    if (credential != null) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (phone) => const OtpProfileBuild()));
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                                content: Text('Some Error Occurs'),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text('ok'))
+                                ]);
+                          });
+                    }
+                  }),
               const SizedBox(
                 height: 50,
               ),
-              SizedBox(
-                width: 200,
-                height: 56,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFE94057),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15))),
-                    onPressed: () {},
-                    child: const Text("Verify",style:TextStyle(color: Colors.white),)),
-              ),
+              // SizedBox(
+              //   width: 200,
+              //   height: 56,
+              //   child: ElevatedButton(
+              //       style: ElevatedButton.styleFrom(
+              //           backgroundColor: const Color(0xFFE94057),
+              //           shape: RoundedRectangleBorder(
+              //               borderRadius: BorderRadius.circular(15))),
+              //       onPressed: () {},
+              //       child: const Text(
+              //         "Verify",
+              //         style: TextStyle(color: Colors.white),
+              //       )),
+              // ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
-                        onPressed: () {
-                          // Navigator.pushNamedAndRemoveUntil(
-                          //   context,
-                          //   'phone',
-                          //       (route) => false,
-                          // );
-                        },
-                        child:  Text(
-                          'Send again',
-                          style: TextStyle(
-                            color: _timerActive ? Colors.grey:const Color(0xFFE94057),
-                            fontSize: 16,
-                            fontFamily: 'Sk-Modernist',
-                            fontWeight: FontWeight.w700,
-                            height: 0.09,
-                          ),
-                        ),)
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        'Send again',
+                        style: TextStyle(
+                          color: _timerActive
+                              ? Colors.grey
+                              : const Color(0xFFE94057),
+                          fontSize: 16,
+                          fontFamily: 'Sk-Modernist',
+                          fontWeight: FontWeight.w700,
+                          height: 0.09,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               )

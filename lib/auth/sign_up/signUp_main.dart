@@ -1,5 +1,9 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mere_maahi_dummy/auth/SignInScreens/signInwithEmailScreen.dart';
@@ -77,7 +81,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(PhoneNumberScreen(),
+                    Get.to(const PhoneNumberScreen(),
                         transition: Transition.downToUp);
                   },
                   child: Container(
@@ -110,10 +114,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                          padding: EdgeInsets.only(top: 6, bottom: 8),
-                          child: SizedBox(
-                              width: 94, child: Divider(color: Colors.grey))),
+                      Expanded(
+                        child: Padding(
+                            padding: EdgeInsets.only(left: 6, right: 8),
+                            child: Divider(color: Colors.grey)),
+                      ),
                       Text(
                         'or sign up with',
                         style: TextStyle(
@@ -123,10 +128,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      Padding(
-                          padding: EdgeInsets.only(top: 6, bottom: 8),
-                          child: SizedBox(
-                              width: 94, child: Divider(color: Colors.grey)))
+                      Expanded(
+                        child: Padding(
+                            padding: EdgeInsets.only(
+                                top: 6, bottom: 8, left: 6, right: 8),
+                            child: Divider(color: Colors.grey)),
+                      )
                     ]),
                 const SizedBox(
                   height: 25,

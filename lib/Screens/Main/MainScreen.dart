@@ -1,14 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
 import 'package:mere_maahi_dummy/Screens/Account/accountScreen.dart';
 import 'package:mere_maahi_dummy/Screens/ChatScreen/ChatScreen.dart';
 import 'package:mere_maahi_dummy/Screens/HomeScreen/main_screen_nav.dart';
-import 'package:mere_maahi_dummy/Screens/Main/usermodel.dart';
 import 'package:mere_maahi_dummy/Screens/MatchesScreen/matches_screen.dart';
-import 'package:mere_maahi_dummy/Screens/SplashScreen/splash_service.dart';
 
-CurrentUserModel? users;
+// CurrentUserModel? users;
+
+// List<UserFetchModel>? userFetchModel;
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -34,8 +34,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    // get();
+    super.initState();
+    CurrentUserRepo().fetchuserdatas();
   }
 
   // void get() async {
@@ -52,22 +52,13 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Future.delayed(Duration(seconds: 1), () {
-    //   final auth = FirebaseAuth.instance;rr
-    //   final user = auth.currentUser;
-    //   if (user != null) {
-    //     userId = user.email;
-    //     print('============+++++++++++++++++++++++++++++++++++======');
-    //     print(user.email);
-    //     print(userId);
-    //   }
-    // });
     return Scaffold(
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.grey,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -87,8 +78,8 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        unselectedItemColor: Colors.black,
         selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.black,
         onTap: _onItemTapped,
       ),
     );

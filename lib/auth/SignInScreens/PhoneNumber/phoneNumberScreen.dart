@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mere_maahi_dummy/auth/SignInScreens/PhoneNumber/otp_repo.dart';
 
 import 'OtpScreen.dart';
 
@@ -24,13 +26,14 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
     _emailController.dispose();
     _countryController.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        padding: const EdgeInsets.only(left: 28, right: 28, top: 140),
+        padding: const EdgeInsets.only(left: 28, right: 28, top: 240),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,37 +119,37 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                 ],
               ),
             ),
+            // const SizedBox(
+            //   height: 54,
+            // ),
+            // const Text(
+            //   'Email ID',
+            //   style: TextStyle(
+            //     color: Colors.black,
+            //     fontSize: 32,
+            //     fontFamily: 'Inter',
+            //     fontWeight: FontWeight.w700,
+            //     height: 0.05,
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 30,
+            // ),
+            // TextFormField(
+            //   decoration: InputDecoration(
+            //     focusedBorder: OutlineInputBorder(
+            //         borderSide: const BorderSide(
+            //           strokeAlign: BorderSide.strokeAlignCenter,
+            //           color: Color(0xFF0F0D23),
+            //         ),
+            //         borderRadius: BorderRadius.circular(20)),
+            //     border: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(20),
+            //     ),
+            //   ),
+            // ),
             const SizedBox(
-              height: 54,
-            ),
-            const Text(
-              'Email ID',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 32,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w700,
-                height: 0.05,
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      strokeAlign: BorderSide.strokeAlignCenter,
-                      color: Color(0xFF0F0D23),
-                    ),
-                    borderRadius: BorderRadius.circular(20)),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 150,
+              height: 50,
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -154,24 +157,47 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                 width: 296,
                 height: 56,
                 child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFE94057),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15))),
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (builder)=> const OtpScreen()));
-                    },
-                    child: const Text(
-                      'Continue',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontFamily: 'Sk-Modernist',
-                        fontWeight: FontWeight.w700,
-                        height: 0.09,
-                      ),
-                    ),),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFE94057),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                  onPressed: () async {
+                    await OtpAuthModel().loginWithPhone(
+                        phoneNumber:
+                            _countryController.text + _phoneController.text,
+                        verificationCompleted:
+                            (PhoneAuthCredential credential) {
+                          // add(OnOtpAuthenticatedEvent(credential: credential));
+                        },
+                        verificationFailed: (FirebaseAuthException e) {
+                          // add(OnOtpErrorEvent(msg: e.message.toString()));
+                        },
+                        codeSent: (String verificationId, int? refreshToken) {
+                          setState(() {
+                            otpid = verificationId;
+                          });
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (builder) => const OtpScreen()));
+                          // add(OnphoneOtpSend(
+                          //     token: refreshToken, verifiactionId: verificationId));
+                        },
+                        codeAutoRetrievalTimeout: (String verifiacationId) {});
+                    // Navigator.push(context, MaterialPageRoute(builder: (builder)=> const OtpScreen()));
+                  },
+                  child: const Text(
+                    'Continue',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontFamily: 'Sk-Modernist',
+                      fontWeight: FontWeight.w700,
+                      height: 0.09,
+                    ),
+                  ),
+                ),
               ),
             )
           ],

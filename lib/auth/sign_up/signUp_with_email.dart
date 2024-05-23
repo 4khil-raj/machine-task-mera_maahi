@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -551,33 +553,71 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
       onTap: () async {
         setState(() {
           isLoading = true;
-          Future<void>.delayed(const Duration(seconds: 2), () {
-            setState(() {
-              isLoading = false;
-            });
-            if (true) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const ThisProfile()));
-            }
-            _signUp();
-          });
         });
-        final newurls = await postPhoto(selectedImage?.path);
-
-        try {
-          await FirebaseFirestore.instance.collection('userDetails').doc().set({
-            'userProfile': newurls,
-            'username': fname.text + lname.text,
-            'gender': selectedVlaue,
-            'dob': selectedDate,
-            'email': emailController.text,
-            'passcode': confirmPasswordController.text
+        bool emailExists = await checkEmailExists(emailController.text);
+        if (emailExists) {
+          return showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                    content: Text('The Email is Alredy Exists'),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            setState(() {
+                              isLoading = false;
+                            });
+                          },
+                          child: const Text('Ok'))
+                    ]);
+              });
+        } else {
+          setState(() {
+            isLoading = true;
+            Future<void>.delayed(const Duration(seconds: 2), () {
+              setState(() {
+                isLoading = false;
+              });
+              if (true) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ThisProfile()));
+              }
+              // _signUp();
+            });
           });
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-              email: emailController.text, password: passwordController.text);
-          print('4');
-        } catch (e) {
-          print(e.toString());
+          final newurls = await postPhoto(selectedImage?.path);
+          UserCredential userCredential = await FirebaseAuth.instance
+              .createUserWithEmailAndPassword(
+                  email: emailController.text,
+                  password: passwordController.text);
+          try {
+            await FirebaseFirestore.instance
+                .collection('userDetails')
+                .doc(userCredential.user!.uid)
+                .set({
+              'userProfile': newurls,
+              'username': fname.text + lname.text,
+              'gender': selectedVlaue,
+              'dob': selectedDate,
+              'email': emailController.text,
+              'passcode': confirmPasswordController.text
+            });
+          } on FirebaseException catch (e) {
+            return showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                      content: Text(e.message.toString()),
+                      actions: [
+                        TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Ok'))
+                      ]);
+                });
+          }
         }
       },
       child: isLoading
@@ -664,5 +704,18 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
           MaterialPageRoute(builder: (context) => ImScreen()),
           (route) => false);
     }
+  }
+
+  Future<bool> checkEmailExists(forgetEmailController) async {
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('userDetails')
+        .where('email', isEqualTo: forgetEmailController)
+        .get();
+    if (querySnapshot.docs.isEmpty) {
+      return false;
+    }
+    return true;
+
+    // return querySnapshot.docs.isNotEmpty == querySnapshot1.docs.isNotEmpty;
   }
 }

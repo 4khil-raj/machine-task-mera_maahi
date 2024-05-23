@@ -3,12 +3,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
 import 'package:mere_maahi_dummy/Screens/Account/editprofile.dart';
 import 'package:mere_maahi_dummy/Screens/OnboardingScreen/onboardingScreen.dart';
 import 'package:mere_maahi_dummy/Screens/SplashScreen/splash_service.dart';
 import 'package:mere_maahi_dummy/auth/sign_in/signIn_with_email.dart';
 
-List? username = userId?.split('@');
 bool swith = false;
 
 class AccountScreen extends StatefulWidget {
@@ -54,6 +54,8 @@ Show_DiloagBox(context) {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
+    List? username = userId?.split('@');
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 230, 236, 231),
       appBar: AppBar(
@@ -77,7 +79,8 @@ class _AccountScreenState extends State<AccountScreen> {
                     child: Row(
                       children: [
                         CircleAvatar(
-                          backgroundImage: AssetImage('assets/images/img4.jpg'),
+                          backgroundImage:
+                              NetworkImage(userAllDetails!.profilePic!),
                           radius: 30,
                         ),
                         SizedBox(
@@ -88,14 +91,14 @@ class _AccountScreenState extends State<AccountScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              '${username?.first.toString().toUpperCase()}',
+                              userAllDetails!.name!.toUpperCase(),
                               style: TextStyle(
                                   fontSize: 17,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              userId!,
+                              userAllDetails!.email!,
                               style: TextStyle(color: Colors.white),
                             )
                           ],

@@ -10,7 +10,14 @@ import 'package:mere_maahi_dummy/Screens/forgotPassword/widgets/form_field.dart'
 class ChatPage extends StatelessWidget {
   final String receiverEmail;
   final String receiverID;
-  ChatPage({required this.receiverID, required this.receiverEmail, super.key});
+  final String profileImage;
+  final String name;
+  ChatPage(
+      {required this.profileImage,
+      required this.name,
+      required this.receiverID,
+      required this.receiverEmail,
+      super.key});
   final messageController = TextEditingController();
   final ChatRepo chatRepo = ChatRepo();
 
@@ -25,7 +32,17 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(receiverEmail),
+        title: Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: NetworkImage(profileImage),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(name.toUpperCase()),
+          ],
+        ),
       ),
       body: Column(
         children: [Expanded(child: buildMessageList()), buildUserInput()],
