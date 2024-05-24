@@ -147,7 +147,9 @@ class _OtpScreenState extends State<OtpScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (phone) => const OtpProfileBuild()));
+                              builder: (phone) => const OtpProfileBuild(
+                                    google: false,
+                                  )));
                     } else {
                       showDialog(
                           context: context,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
 import 'package:mere_maahi_dummy/Screens/SplashScreen/splash_service.dart';
 import 'package:mere_maahi_dummy/Widget/CustomImageViewer.dart';
 
@@ -19,12 +20,14 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     CurrentUserRepo().fetchuserdatas();
+    FetchAlUsersDatas().fetchdata();
     splashServices.isLogIn(BuildContext, context);
   }
 
   @override
   Widget build(BuildContext context) {
     CurrentUserRepo().fetchuserdatas();
+    // FetchAlUsersDatas().fetchdata();
 
     return Scaffold(
       body: SizedBox(

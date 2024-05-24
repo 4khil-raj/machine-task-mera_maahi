@@ -224,31 +224,31 @@ class _ThisProfileState extends State<ThisProfile> {
           ),
         ),
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(top: 12.0, right: 10),
-          child: TextButton(
-            onPressed: () {
-              Get.to(const ImScreen(),
-                  transition: Transition.rightToLeftWithFade);
-              // Navigator.pushAndRemoveUntil(
-              //     context,
-              //     MaterialPageRoute(builder: (builder) => const MainScreen()),
-              //         (route) => false);
-            },
-            child: const Text(
-              'Skip',
-              style: TextStyle(
-                color: Color(0xFFE94057),
-                fontSize: 16,
-                fontFamily: 'Sk-Modernist',
-                fontWeight: FontWeight.w700,
-                height: 0.09,
-              ),
-            ),
-          ),
-        ),
-      ],
+      // actions: [
+      //   Padding(
+      //     padding: const EdgeInsets.only(top: 12.0, right: 10),
+      //     child: TextButton(
+      //       onPressed: () {
+      //         Get.to(const ImScreen(),
+      //             transition: Transition.rightToLeftWithFade);
+      //         // Navigator.pushAndRemoveUntil(
+      //         //     context,
+      //         //     MaterialPageRoute(builder: (builder) => const MainScreen()),
+      //         //         (route) => false);
+      //       },
+      //       child: const Text(
+      //         'Skip',
+      //         style: TextStyle(
+      //           color: Color(0xFFE94057),
+      //           fontSize: 16,
+      //           fontFamily: 'Sk-Modernist',
+      //           fontWeight: FontWeight.w700,
+      //           height: 0.09,
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ],
     );
   }
 }

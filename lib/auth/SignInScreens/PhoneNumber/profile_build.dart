@@ -1,19 +1,24 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mere_maahi_dummy/Const/Style.dart';
 import 'package:mere_maahi_dummy/Const/const.dart';
 import 'package:mere_maahi_dummy/Const/theme.dart';
+import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/widgets/form_field.dart';
 import 'package:mere_maahi_dummy/auth/SignInScreens/signInwithEmailScreen.dart';
 import 'package:mere_maahi_dummy/components/common_input.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class OtpProfileBuild extends StatefulWidget {
-  const OtpProfileBuild({super.key});
-
+  const OtpProfileBuild({required this.google, super.key});
+  final bool google;
   @override
   State<OtpProfileBuild> createState() => _OtpProfileBuildState();
 }
@@ -77,7 +82,7 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
                 SizedBox(
                   height: 10,
                 ),
-                buildEmailTextField(),
+                widget.google ? SizedBox() : buildEmailTextField(),
                 SizedBox(
                   height: 10,
                 ),
@@ -114,10 +119,9 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
                 setState(() {
                   Loading = false;
                 });
-                await Future.delayed(Duration(seconds: 2));
-                setState(() {
-                  Loading = true;
-                });
+                widget.google ? buildGoogle() : buildprofile();
+                //ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+                // await Future.delayed(Duration(seconds: 2));
               },
               child: const Text(
                 'Finish',
@@ -157,7 +161,7 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
           borderRadius: BorderRadius.circular(20),
         ),
         // labelText: 'Email',
-        hintText: "roberto@dimo.com",
+        hintText: "email@demo.com",
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         labelStyle: const TextStyle(
@@ -169,6 +173,94 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
         ),
       ),
     );
+  }
+
+  Future<String> postPhoto(photo) async {
+    firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+        .ref('${DateTime.now().millisecondsSinceEpoch.toString()}');
+    firebase_storage.UploadTask uploadTask = ref.putFile(File(photo));
+    await uploadTask;
+    var newUrl = await ref.getDownloadURL();
+    return newUrl;
+  }
+
+  void buildprofile() async {
+    final newurls = await postPhoto(pickedImage?.path);
+
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text);
+      CurrentUserRepo().fetchuserdatas();
+      setState(() {
+        Loading = true;
+      });
+      Navigator.push(
+          context, MaterialPageRoute(builder: (phone) => const ThisProfile()));
+      await FirebaseFirestore.instance
+          .collection('userDetails')
+          .doc(userCredential.user?.uid)
+          .set({
+        'userProfile': newurls,
+        'username': nameController.text,
+        'gender': selectedVlaue,
+        'dob': selectedDate,
+        'email': emailController.text,
+        'passcode': passwordController.text
+      });
+    } on FirebaseException catch (e) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(content: Text(e.message.toString()), actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      Loading = true;
+                    });
+                  },
+                  child: Text('ok'))
+            ]);
+          });
+    }
+  }
+
+  void buildGoogle() async {
+    final newurls = await postPhoto(pickedImage?.path);
+
+    try {
+      User? userCredential = FirebaseAuth.instance.currentUser;
+      CurrentUserRepo().fetchuserdatas();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (phone) => const ThisProfile()));
+      await FirebaseFirestore.instance
+          .collection('userDetails')
+          .doc(userCredential?.uid)
+          .set({
+        'userProfile': newurls,
+        'username': nameController.text,
+        'gender': selectedVlaue,
+        'dob': selectedDate,
+        'email': userCredential?.email,
+        'passcode': passwordController.text
+      });
+    } on FirebaseException catch (e) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(content: Text(e.message.toString()), actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      Loading = true;
+                    });
+                  },
+                  child: Text('ok'))
+            ]);
+          });
+    }
   }
 
   Widget buildPasswordTextField() {
@@ -201,7 +293,7 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
           borderRadius: BorderRadius.circular(20),
         ),
         // labelText: 'Email',
-        hintText: "**************",
+        hintText: "Password",
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         labelStyle: const TextStyle(
@@ -220,7 +312,7 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Last Name',
+          'Enter Your Name',
           style: Styles.bold_app_accent_12,
         ),
         const SizedBox(
@@ -234,7 +326,7 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
             }
             return null;
           },
-          decoration: InputStyle.inputDecoration_text_field(hint: 'kumar'),
+          decoration: InputStyle.inputDecoration_text_field(hint: 'Alexa'),
         )
       ],
     );
@@ -321,7 +413,6 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
               }
               setState(() {
                 selectedDate = newDate;
-                print('done');
               });
             },
             child: Container(

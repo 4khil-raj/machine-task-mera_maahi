@@ -1,10 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
 import 'package:mere_maahi_dummy/Screens/Account/accountScreen.dart';
 import 'package:mere_maahi_dummy/Screens/ChatScreen/ChatScreen.dart';
+import 'package:mere_maahi_dummy/Screens/ExtraScreen/Religion/religionScreen.dart';
+import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
 import 'package:mere_maahi_dummy/Screens/HomeScreen/main_screen_nav.dart';
 import 'package:mere_maahi_dummy/Screens/MatchesScreen/matches_screen.dart';
+import 'package:mere_maahi_dummy/Screens/Passions/PassionchipViewItem.dart';
 
 // CurrentUserModel? users;
 

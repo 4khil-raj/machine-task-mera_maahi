@@ -17,7 +17,10 @@ class UserTile extends StatelessWidget {
         onTap: onTap,
         child: Column(
           children: [
-            Divider(),
+            // Divider(),
+            SizedBox(
+              height: 5,
+            ),
             ListTile(
               leading: CircleAvatar(
                 radius: 30,

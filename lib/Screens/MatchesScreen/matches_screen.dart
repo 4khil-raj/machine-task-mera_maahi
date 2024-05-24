@@ -59,15 +59,10 @@ class _MatchesScreenState extends State<MatchesScreen> {
                   ),
                 ),
               ),
-              // TabBarView(children: [])
               Expanded(
-                  // height: 1000,
                   child: TabBarView(children: [
                 Newmaches(),
                 Daily(),
-                Center(
-                  child: Text('oke'),
-                )
               ])),
             ],
           ),

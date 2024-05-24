@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
 import 'package:mere_maahi_dummy/Screens/SplashScreen/splash_service.dart';
 
 class MainScreenNav extends StatefulWidget {
@@ -145,10 +146,7 @@ class _MainScreenNavState extends State<MainScreenNav> {
                         ),
                         Row(
                           children: [
-                            Text(
-                                FirebaseAuth.instance.currentUser!.uid
-                                    .split('D')
-                                    .first,
+                            Text('SHA548A647b',
                                 style: TextStyle(color: Colors.white)),
                             Padding(
                               padding: const EdgeInsets.only(left: 7),
@@ -340,19 +338,95 @@ class _MainScreenNavState extends State<MainScreenNav> {
                 ),
                 trailing: Icon(Icons.arrow_forward_ios_rounded),
               ),
+              // Align(
+              //     alignment: Alignment.topLeft,
+              //     child: Padding(
+              //       padding: const EdgeInsets.only(left: 8),
+              //       child: Text('Premium Matches (68)'),
+              //     )),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: SizedBox(
+              //     height: 190,
+              //     child: GridView.builder(
+              //         scrollDirection: Axis.horizontal,
+              //         itemCount: images.length,
+              //         gridDelegate:
+              //             const SliverGridDelegateWithFixedCrossAxisCount(
+              //           crossAxisCount: 1,
+              //           crossAxisSpacing: 1.0,
+              //           mainAxisSpacing: 1.0,
+              //         ),
+              //         itemBuilder: (context, index) {
+              //           return Padding(
+              //             padding: const EdgeInsets.all(8.0),
+              //             child: Container(
+              //               color: Colors.white,
+              //               // height: 195,
+              //               width: 145,
+              //               child: Column(
+              //                 children: [
+              //                   SizedBox(
+              //                     height: 10,
+              //                   ),
+              //                   Container(
+              //                     child: Image.asset(
+              //                       images[index],
+              //                       height: 110,
+              //                       width: 140,
+              //                       fit: BoxFit.cover,
+              //                     ),
+              //                   ),
+              //                   Align(
+              //                       alignment: Alignment.topLeft,
+              //                       child: Padding(
+              //                         padding:
+              //                             const EdgeInsets.only(left: 23.0),
+              //                         child: Text(
+              //                           '23 yrs, 5\' 7"',
+              //                           style: TextStyle(fontSize: 10),
+              //                         ),
+              //                       )),
+              //                   Align(
+              //                       alignment: Alignment.topLeft,
+              //                       child: Padding(
+              //                         padding:
+              //                             const EdgeInsets.only(left: 23.0),
+              //                         child: Text(
+              //                           'Malayalam',
+              //                           style: TextStyle(fontSize: 10),
+              //                         ),
+              //                       )),
+              //                   Align(
+              //                       alignment: Alignment.topLeft,
+              //                       child: Padding(
+              //                         padding:
+              //                             const EdgeInsets.only(left: 23.0),
+              //                         child: Text(
+              //                           'Palakad,kerala',
+              //                           style: TextStyle(fontSize: 10),
+              //                         ),
+              //                       ))
+              //                 ],
+              //               ),
+              //             ),
+              //           );
+              //         }),
+              //   ),
+              // ),
               Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
-                    child: Text('Premium Matches (68)'),
+                    child: Text('New Matches (${details.length})'),
                   )),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  height: 190,
+                  height: 200,
                   child: GridView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: images.length,
+                      itemCount: details.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 1,
@@ -361,134 +435,93 @@ class _MainScreenNavState extends State<MainScreenNav> {
                       ),
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            color: Colors.white,
-                            // height: 195,
-                            width: 145,
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  child: Image.asset(
-                                    images[index],
-                                    height: 110,
-                                    width: 140,
-                                    fit: BoxFit.cover,
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Stack(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                          details[index].profilePic!,
+                                          // fit: BoxFit.fill,
+                                        ))),
+                                // decoration: ,
+                                // height: 150,
+                              ),
+                              Positioned(
+                                bottom: 10,
+                                left: 9,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 243, 192, 41),
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Text(
+                                    '  ${details[index].name!.toUpperCase()}  ',
+                                    style: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 255, 0, 0),
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
-                                Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 23.0),
-                                      child: Text(
-                                        '23 yrs, 5\' 7"',
-                                        style: TextStyle(fontSize: 10),
-                                      ),
-                                    )),
-                                Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 23.0),
-                                      child: Text(
-                                        'Malayalam',
-                                        style: TextStyle(fontSize: 10),
-                                      ),
-                                    )),
-                                Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 23.0),
-                                      child: Text(
-                                        'Palakad,kerala',
-                                        style: TextStyle(fontSize: 10),
-                                      ),
-                                    ))
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         );
-                      }),
-                ),
-              ),
-              Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Text('New Matches (28)'),
-                  )),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: 190,
-                  child: GridView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: images.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        crossAxisSpacing: 1.0,
-                        mainAxisSpacing: 1.0,
-                      ),
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            color: Colors.white,
-                            // height: 195,
-                            width: 145,
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  child: Image.asset(
-                                    images[index],
-                                    height: 110,
-                                    width: 140,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 23.0),
-                                      child: Text(
-                                        '23 yrs, 5\' 7"',
-                                        style: TextStyle(fontSize: 10),
-                                      ),
-                                    )),
-                                Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 23.0),
-                                      child: Text(
-                                        'Malayalam',
-                                        style: TextStyle(fontSize: 10),
-                                      ),
-                                    )),
-                                Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 23.0),
-                                      child: Text(
-                                        'Palakad,kerala',
-                                        style: TextStyle(fontSize: 10),
-                                      ),
-                                    ))
-                              ],
-                            ),
-                          ),
-                        );
+                        // Padding(
+                        //             padding: const EdgeInsets.all(8.0),
+                        //             child: Container(
+                        //               color: Colors.white,
+                        //               // height: 195,
+                        //               width: 145,
+                        //               child: Column(
+                        //                 children: [
+                        //                   SizedBox(
+                        //                     height: 10,
+                        //                   ),
+                        //                   Container(
+                        //                       height: 150,
+                        //                       child: Image.network(
+                        //                         details[index].profilePic!,
+                        //                         fit: BoxFit.cover,
+                        //                       )),
+                        //                   Align(
+                        //                       alignment: Alignment.topLeft,
+                        //                       child: Padding(
+                        //                         padding:
+                        //                             const EdgeInsets.only(left: 23.0),
+                        //                         child: Text(
+                        //                           // '23 yrs, 5\' 7"',
+                        //                           details[index].name!,
+                        //                           style: TextStyle(fontSize: 10),
+                        //                         ),
+                        //                       )),
+                        //                   // Align(
+                        //                   //     alignment: Alignment.topLeft,
+                        //                   //     child: Padding(
+                        //                   //       padding:
+                        //                   //           const EdgeInsets.only(left: 23.0),
+                        //                   //       child: Text(
+                        //                   //         'Malayalam',
+                        //                   //         style: TextStyle(fontSize: 10),
+                        //                   //       ),
+                        //                   //     )),
+                        //                   // Align(
+                        //                   //     alignment: Alignment.topLeft,
+                        //                   //     child: Padding(
+                        //                   //       padding:
+                        //                   //           const EdgeInsets.only(left: 23.0),
+                        //                   //       child: Text(
+                        //                   //         'Palakad,kerala',
+                        //                   //         style: TextStyle(fontSize: 10),
+                        //                   //       ),
+                        //                   //     ))
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //           );
                       }),
                 ),
               ),

@@ -6,8 +6,6 @@ import 'package:mere_maahi_dummy/Screens/ChatScreen/userTile.dart';
 import 'package:mere_maahi_dummy/Screens/SplashScreen/splash_service.dart';
 import 'package:mere_maahi_dummy/core/app_export.dart';
 
-import '../../core/utils/size_utils.dart';
-
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
 
@@ -109,24 +107,6 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 )),
             const SizedBox(height: 15),
-            // const Align(
-            //   alignment: Alignment.centerLeft,
-            //   child: Padding(
-            //     padding: EdgeInsets.only(left: 10),
-            //     child: Text(
-            //       'Activities',
-            //       style: TextStyle(
-            //         color: Colors.black,
-            //         fontSize: 18,
-            //         fontFamily: 'Sk-Modernist',
-            //         fontWeight: FontWeight.w700,
-            //         height: 0.08,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            const SizedBox(height: 15),
-            // _buildUserProfileList(context),
             const SizedBox(height: 15),
             const Align(
               alignment: Alignment.centerLeft,
@@ -145,7 +125,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             ),
             const SizedBox(
-              height: 9,
+              height: 10,
             ),
 
             //
@@ -157,9 +137,8 @@ class _ChatScreenState extends State<ChatScreen> {
                     return const Text('error');
                   }
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Text('loading');
+                    return const Text('loading');
                   }
-
                   return ListView(
                     children: snapshot.data!
                         .map<Widget>(
@@ -169,7 +148,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
           ])),
@@ -196,62 +175,5 @@ class _ChatScreenState extends State<ChatScreen> {
     } else {
       return const SizedBox();
     }
-  }
-
-  ///Profile List
-  Widget _buildUserProfileList(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: SizedBox(
-        height: 95,
-        child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.only(left: 10),
-            itemBuilder: (context, index) {
-              return SizedBox(
-                width: 66,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 1),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 66,
-                          width: 66,
-                          padding: const EdgeInsets.all(2),
-                          decoration: const ShapeDecoration(
-                            color: Colors.white,
-                            shape: OvalBorder(
-                              side: BorderSide(
-                                  width: 2, color: Color(0xFFF27121)),
-                            ),
-                          ),
-                          child: CustomImageView(
-                            imagePath: ImageConstant.imgPhoto58x58,
-                            height: 58,
-                            width: 58,
-                            radius: BorderRadius.circular(
-                              29,
-                            ),
-                            alignment: Alignment.center,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 6,
-                        ),
-                        const Text('Che_09')
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 15);
-            },
-            itemCount: 10),
-      ),
-    );
   }
 }

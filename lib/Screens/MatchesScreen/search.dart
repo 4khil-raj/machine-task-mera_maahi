@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/widgets/form_field.dart';
 
 class Newmaches extends StatefulWidget {
@@ -15,7 +16,7 @@ List<String> photo = [
   'assets/images/img_photo_4.png',
   'assets/images/img_photo_415x375.png'
 ];
-List<String> name = ['Alexa', 'Swagi'];
+// List<String> name = ['Alexa', 'Swagi'];
 // List<String>
 
 class _SearchMatchesState extends State<Newmaches> {
@@ -24,7 +25,7 @@ class _SearchMatchesState extends State<Newmaches> {
     return Scaffold(
       body: Expanded(
         child: ListView.builder(
-            itemCount: name.length,
+            itemCount: details.length,
             itemBuilder: (context, index) {
               return Column(
                 children: [
@@ -36,7 +37,8 @@ class _SearchMatchesState extends State<Newmaches> {
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20)),
-                        child: Image(image: AssetImage(photo[index])),
+                        child: Image(
+                            image: NetworkImage(details[index].profilePic!)),
                       ),
                       Positioned(
                           bottom: 20,
@@ -48,7 +50,7 @@ class _SearchMatchesState extends State<Newmaches> {
                                 Row(
                                   children: [
                                     Text(
-                                      name[index],
+                                      details[index].name!,
                                       style: TextStyle(
                                           color: Color.fromARGB(
                                               255, 255, 255, 255),

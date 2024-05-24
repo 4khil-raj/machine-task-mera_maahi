@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
 
 class Daily extends StatefulWidget {
   const Daily({super.key});
@@ -49,7 +49,7 @@ class _DailyState extends State<Daily> {
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(20)),
                   child: Image(
-                      image: NetworkImage(userAllDetails?.profilePic ??
+                      image: NetworkImage(details.first.profilePic ??
                           'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png')),
                 ),
                 Positioned(
@@ -62,7 +62,7 @@ class _DailyState extends State<Daily> {
                           Row(
                             children: [
                               Text(
-                                '${userAllDetails?.name}',
+                                '${details.first.name}',
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 255, 255, 255),
                                     fontSize: 27,
@@ -206,11 +206,11 @@ class _DailyState extends State<Daily> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
                 child: Column(
-                  children: [
+                  children: const [
                     Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding: const EdgeInsets.all(13),
+                          padding: EdgeInsets.all(13),
                           child: Text(
                             'About Chithra',
                             style: TextStyle(
@@ -218,8 +218,7 @@ class _DailyState extends State<Daily> {
                           ),
                         )),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 13, right: 13, bottom: 13),
+                      padding: EdgeInsets.only(left: 13, right: 13, bottom: 13),
                       child: Text(
                         'Thank you for shoing interrest in my profile. Here are a few things about me. In terms of eduction m i have acquied my Bchelors in Law. Modern yet traditional,I am deeply inclined in our values, ethics ',
                         style: TextStyle(fontSize: 16),

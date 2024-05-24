@@ -1,16 +1,19 @@
 // ignore_for_file: prefer_final_fields
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
+import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
+import 'package:mere_maahi_dummy/auth/SignInScreens/PhoneNumber/profile_build.dart';
 import 'package:mere_maahi_dummy/auth/SignInScreens/signInwithEmailScreen.dart';
 import '../../Widget/CustomImageViewer.dart';
 import '../../core/utils/image_constant.dart';
 import '../../domain/facebookauth/facebook_auth_helper.dart';
-import '../../domain/googleauth/google_auth_helper.dart';
 import '../SignInScreens/PhoneNumber/phoneNumberScreen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -22,6 +25,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   late bool _isLoading = false;
+  bool button = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -143,55 +147,62 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            decoration: ShapeDecoration(
-                                shape: RoundedRectangleBorder(
-                                    side: const BorderSide(
-                                        width: 1, color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(10))),
-                            child: IconButton(
-                                onPressed: () {
-                                  onTapBtnFacebook();
-                                },
-                                icon: CustomImageView(
-                                    color: const Color(0xFFE94057),
-                                    imagePath: ImageConstant.imgFacebook)),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Container(
-                              decoration: ShapeDecoration(
-                                  shape: RoundedRectangleBorder(
-                                      side: const BorderSide(
-                                          width: 1,
-                                          color:
-                                              Color.fromARGB(255, 178, 27, 27)),
-                                      borderRadius: BorderRadius.circular(10))),
-                              child: IconButton(
-                                  onPressed: () {
-                                    onTapBtnGoogle();
-                                  },
-                                  icon: CustomImageView(
-                                      color: const Color(0xFFE94057),
-                                      imagePath: ImageConstant.imgGoogle)),
-                            ),
-                          ),
-                          Padding(
-                              padding: const EdgeInsets.only(left: 25),
-                              child: Container(
-                                decoration: ShapeDecoration(
-                                    shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                            width: 1, color: Colors.grey),
-                                        borderRadius:
-                                            BorderRadius.circular(10))),
-                                child: IconButton(
-                                  onPressed: () {},
-                                  icon: CustomImageView(
-                                      color: const Color(0xFFE94057),
-                                      imagePath: ImageConstant.imgUser),
+                          // Container(
+                          //   decoration: ShapeDecoration(
+                          //       shape: RoundedRectangleBorder(
+                          //           side: const BorderSide(
+                          //               width: 1, color: Colors.grey),
+                          //           borderRadius: BorderRadius.circular(10))),
+                          //   child: IconButton(
+                          //       onPressed: () {
+                          //         onTapBtnFacebook();
+                          //       },
+                          //       icon: CustomImageView(
+                          //           color: const Color(0xFFE94057),
+                          //           imagePath: ImageConstant.imgFacebook)),
+                          // ),if this commented buttons is usign give the padding of the google button widgets padding 20
+                          button
+                              ? const CircularProgressIndicator(
+                                  color: Colors.red,
+                                )
+                              : Container(
+                                  decoration: ShapeDecoration(
+                                      shape: RoundedRectangleBorder(
+                                          side: const BorderSide(
+                                              width: 1,
+                                              color: Color.fromARGB(
+                                                  255, 178, 27, 27)),
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                  child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          button = true;
+                                        });
+                                        onTapBtnGoogle(context);
+                                      },
+                                      icon: CustomImageView(
+                                          color: const Color(0xFFE94057),
+                                          imagePath: ImageConstant.imgGoogle)),
                                 ),
-                              ))
+                          // Padding(
+                          //     padding: const EdgeInsets.only(left: 25),
+                          //     child: Container(
+                          //       decoration: ShapeDecoration(
+                          //           shape: RoundedRectangleBorder(
+                          //               side: const BorderSide(
+                          //                   width: 1,
+                          //                   color:
+                          //                       Color.fromARGB(255, 255, 0, 0)),
+                          //               borderRadius:
+                          //                   BorderRadius.circular(10))),
+                          //       child: IconButton(
+                          //         onPressed: () {},
+                          //         icon: CustomImageView(
+                          //             color: const Color(0xFFE94057),
+                          //             imagePath: ImageConstant.imgUser),
+                          //       ),
+                          //     ))
                         ])),
                 const SizedBox(
                   height: 30,
@@ -246,24 +257,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  onTapBtnFacebook() async {
-    await FacebookAuthHelper().facebookSignInProcess().then((facebookUser) {
-      //TODO Actions to be performed after signin
-    }).catchError((onError) {
-      Get.snackbar('Error', onError.toString());
-    });
-  }
+  // onTapBtnFacebook() async {
+  //   await FacebookAuthHelper().facebookSignInProcess().then((facebookUser) {
+  //   }).catchError((onError) {
+  //     Get.snackbar('Error', onError.toString());
+  //   });
+  // }
 
-  onTapBtnGoogle() async {
-    // await GoogleAuthHelper().googleSignInProcess().then((googleUser) {
-    //   if (googleUser != null) {
-    //     //TODO Actions to be performed after signin
-    //   } else {
-    //     Get.snackbar('Error', 'user data is empty');
-    //   }
-    // }).catchError((onError) {
-    //   Get.snackbar('Error', onError.toString());
-    // });
+  onTapBtnGoogle(context) async {
     User? user;
     try {
       final googleUser = await GoogleSignIn().signIn();
@@ -274,9 +275,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
         final userCredential =
             await FirebaseAuth.instance.signInWithCredential(creds);
         user = userCredential.user;
+        bool userfound = await checkEmailExists(user!.email!);
+        setState(() {
+          button = false;
+        });
+        if (userfound) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (c) => const OtpProfileBuild(
+                        google: true,
+                      )));
+        } else {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (phone) => const MainScreen()));
+        }
       }
-    } catch (e) {
-      print('Error during Google sign in: ${e.toString()}');
+    } on FirebaseException catch (e) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(content: Text(e.message.toString()), actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      button = false;
+                    });
+                  },
+                  child: const Text('ok'))
+            ]);
+          });
     }
+  }
+
+  Future<bool> checkEmailExists(String email) async {
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('userDetails')
+        .where('email', isEqualTo: email)
+        .get();
+    if (querySnapshot.docs.isNotEmpty) {
+      return false;
+    }
+    return true;
   }
 }

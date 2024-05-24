@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
+String? Selectedpassionlables;
+
 class PassionChipViewItem extends StatefulWidget {
   final IconData avatarsIcons;
   final String labels;
-  const PassionChipViewItem(
-      {super.key, required this.labels, required this.avatarsIcons});
+  const PassionChipViewItem({
+    super.key,
+    required this.labels,
+    required this.avatarsIcons,
+  });
 
   @override
   State<PassionChipViewItem> createState() => _PassionChipViewItemState();
@@ -14,6 +19,7 @@ class _PassionChipViewItemState extends State<PassionChipViewItem> {
   bool isSelected = false;
   @override
   Widget build(BuildContext context) {
+    Selectedpassionlables = widget.labels;
     return RawChip(
       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 17),
       showCheckmark: false,
@@ -21,7 +27,7 @@ class _PassionChipViewItemState extends State<PassionChipViewItem> {
       label: Text(
         widget.labels,
         style: TextStyle(
-          color: isSelected! ? Colors.white : Colors.black,
+          color: isSelected ? Colors.white : Colors.black,
           fontSize: 14,
           fontFamily: 'Sk-Modernist',
           fontWeight: FontWeight.w400,
@@ -31,7 +37,7 @@ class _PassionChipViewItemState extends State<PassionChipViewItem> {
         padding: const EdgeInsets.only(right: 8.0),
         child: Icon(
           widget.avatarsIcons,
-          color: isSelected! ? Colors.white : Colors.red,
+          color: isSelected ? Colors.white : Colors.red,
         ),
       ),
       selected: isSelected,
@@ -46,6 +52,7 @@ class _PassionChipViewItemState extends State<PassionChipViewItem> {
       onSelected: (value) {
         setState(() {
           isSelected = value;
+          Selectedpassionlables = widget.labels;
         });
       },
     );
