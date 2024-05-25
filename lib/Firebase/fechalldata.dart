@@ -11,6 +11,8 @@ class FetchAlUsersDatas {
       for (var element in querySnapshot.docs) {
         final thedata = element.data();
         UserFetchModel model = UserFetchModel(
+            about: thedata['about'],
+            uid: thedata['uid'],
             dob: thedata['dob'],
             email: thedata['email'],
             gender: thedata['gender'],

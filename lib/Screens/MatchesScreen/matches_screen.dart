@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
 import 'package:mere_maahi_dummy/Screens/MatchesScreen/daily.dart';
 import 'package:mere_maahi_dummy/Screens/MatchesScreen/search.dart';
 
@@ -42,8 +43,9 @@ class _MatchesScreenState extends State<MatchesScreen> {
                       //     ),
                       //   ],
                       // ),
-                      Text('New (76)', style: TextStyle(fontSize: 18)),
-                      Text('Daily (20)', style: TextStyle(fontSize: 18)),
+                      Text('New (${details.length})',
+                          style: TextStyle(fontSize: 18)),
+                      Text('Daily (1)', style: TextStyle(fontSize: 18)),
                       // Text('My matches (652)', style: TextStyle(fontSize: 18)),
                       // Row(
                       //   children: [
@@ -62,7 +64,9 @@ class _MatchesScreenState extends State<MatchesScreen> {
               Expanded(
                   child: TabBarView(children: [
                 Newmaches(),
-                Daily(),
+                Daily(
+                  appbar: false,
+                ),
               ])),
             ],
           ),

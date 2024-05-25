@@ -2,10 +2,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
+import 'package:mere_maahi_dummy/Screens/ChatScreen/chatpage.dart';
 
 class Daily extends StatefulWidget {
-  const Daily({super.key});
-
+  const Daily(
+      {super.key,
+      this.image,
+      this.email,
+      this.name,
+      this.about,
+      required this.appbar});
+  final String? name;
+  final String? image;
+  final String? email;
+  final String? about;
+  final bool appbar;
   @override
   State<Daily> createState() => _DailyState();
 }
@@ -14,27 +25,45 @@ class _DailyState extends State<Daily> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: widget.appbar
+          ? AppBar(
+              title: Text(widget.name ?? ''),
+            )
+          : null,
       floatingActionButton: Center(
         child: Align(
           alignment: Alignment.bottomCenter,
-          child: Container(
-              height: 35,
-              width: 130,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.blue, Colors.green])),
-              child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Connect Now',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ))),
+          child: InkWell(
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (c) => ChatPage(
+                    name: widget.name ?? details.first.name ?? '',
+                    profileImage:
+                        widget.image ?? details.first.profilePic ?? '',
+                    receiverID: widget.email ?? details.first.email ?? '',
+                    receiverEmail: '',
+                  ),
+                )),
+            child: Container(
+                height: 35,
+                width: 130,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: const [Colors.blue, Colors.green])),
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Connect Now',
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ))),
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -49,7 +78,8 @@ class _DailyState extends State<Daily> {
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(20)),
                   child: Image(
-                      image: NetworkImage(details.first.profilePic ??
+                      image: NetworkImage(widget.image ??
+                          details.first.profilePic ??
                           'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png')),
                 ),
                 Positioned(
@@ -62,7 +92,7 @@ class _DailyState extends State<Daily> {
                           Row(
                             children: [
                               Text(
-                                '${details.first.name}',
+                                widget.name ?? '${details.first.name}',
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 255, 255, 255),
                                     fontSize: 27,
@@ -206,21 +236,30 @@ class _DailyState extends State<Daily> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
                 child: Column(
-                  children: const [
+                  children: [
                     Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
                           padding: EdgeInsets.all(13),
-                          child: Text(
-                            'About Chithra',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                          child: Row(
+                            children: [
+                              Text('About  ',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500)),
+                              Text(
+                                widget.name ??
+                                    '${details.first.name?.toUpperCase()}',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
                         )),
                     Padding(
                       padding: EdgeInsets.only(left: 13, right: 13, bottom: 13),
                       child: Text(
-                        'Thank you for shoing interrest in my profile. Here are a few things about me. In terms of eduction m i have acquied my Bchelors in Law. Modern yet traditional,I am deeply inclined in our values, ethics ',
+                        widget.about ?? '${details.first.about}',
                         style: TextStyle(fontSize: 16),
                       ),
                     ),

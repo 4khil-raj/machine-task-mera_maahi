@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
 import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
 import 'package:mere_maahi_dummy/auth/SignInScreens/PhoneNumber/profile_build.dart';
@@ -287,6 +288,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         google: true,
                       )));
         } else {
+          CurrentUserRepo().fetchuserdatas();
           Navigator.push(context,
               MaterialPageRoute(builder: (phone) => const MainScreen()));
         }

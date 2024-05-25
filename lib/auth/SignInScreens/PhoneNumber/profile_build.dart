@@ -23,6 +23,7 @@ class OtpProfileBuild extends StatefulWidget {
   State<OtpProfileBuild> createState() => _OtpProfileBuildState();
 }
 
+final aboutyouController = TextEditingController();
 final nameController = TextEditingController();
 final emailController = TextEditingController();
 // final dobController = TextEditingController();
@@ -82,6 +83,14 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
                 SizedBox(
                   height: 10,
                 ),
+                CustomTextFormField(
+                  maxline: 5,
+                  hintText: 'About You',
+                  controller: aboutyouController,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 widget.google ? SizedBox() : buildEmailTextField(),
                 SizedBox(
                   height: 10,
@@ -120,8 +129,6 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
                   Loading = false;
                 });
                 widget.google ? buildGoogle() : buildprofile();
-                //ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-                // await Future.delayed(Duration(seconds: 2));
               },
               child: const Text(
                 'Finish',
@@ -201,6 +208,8 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
           .collection('userDetails')
           .doc(userCredential.user?.uid)
           .set({
+        'about': aboutyouController.text,
+        'uid': userCredential.user?.uid,
         'userProfile': newurls,
         'username': nameController.text,
         'gender': selectedVlaue,
@@ -238,6 +247,8 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
           .collection('userDetails')
           .doc(userCredential?.uid)
           .set({
+        'about': aboutyouController.text,
+        'uid': userCredential?.uid,
         'userProfile': newurls,
         'username': nameController.text,
         'gender': selectedVlaue,

@@ -8,6 +8,8 @@ UserFetchModel? userAllDetails;
 
 class CurrentUserRepo {
   Future<void> fetchuserdatas() async {
+    // userAllDetails = null;
+
     try {
       User? user;
       user = FirebaseAuth.instance.currentUser;

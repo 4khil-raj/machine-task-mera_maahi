@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
 import 'package:mere_maahi_dummy/Screens/DoB/dateOfBirthScreen.dart';
 
 import '../../Widget/CustomImageViewer.dart';
@@ -20,6 +21,7 @@ class ThisProfile extends StatefulWidget {
 class _ThisProfileState extends State<ThisProfile> {
   @override
   Widget build(BuildContext context) {
+    CurrentUserRepo().fetchuserdatas();
     return SafeArea(
         child: Scaffold(
       appBar: _buildAppBar(),

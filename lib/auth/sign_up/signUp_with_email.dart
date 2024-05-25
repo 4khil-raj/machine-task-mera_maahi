@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:mere_maahi_dummy/Const/theme.dart';
 import 'package:mere_maahi_dummy/Firebase/firebase_auth_services.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
+import 'package:mere_maahi_dummy/Screens/forgotPassword/widgets/form_field.dart';
 import 'package:mere_maahi_dummy/auth/sign_in/signIn_with_email.dart';
 import 'package:mere_maahi_dummy/components/common_input.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -68,6 +69,7 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
     ));
   }
 
+  final aboutyouController = TextEditingController();
   XFile? selectedImage;
   bool imageselected = false;
   @override
@@ -144,7 +146,17 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
                             ///Confirm Password
                             dConfirmPassword(context),
 
+                            CustomTextFormField(
+                              maxline: 5,
+                              hintText: 'About You',
+                              controller: aboutyouController,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            )
+
                             ///SignUp Button
+                            ,
                             buildSignUpButton(context),
                             others()
                           ],
@@ -364,13 +376,13 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      content: Text('only 18+ peopels can join'),
+                      content: const Text('only 18+ peopels can join'),
                       actions: [
                         ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text('Ok'))
+                            child: const Text('Ok'))
                       ],
                     );
                   },
@@ -379,7 +391,6 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
               }
               setState(() {
                 selectedDate = newDate;
-                print('done');
               });
             },
             child: Container(
@@ -560,7 +571,7 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                    content: Text('The Email is Alredy Exists'),
+                    content: const Text('The Email is Alredy Exists'),
                     actions: [
                       TextButton(
                           onPressed: () {
@@ -598,6 +609,8 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
                 .collection('userDetails')
                 .doc(userCredential.user!.uid)
                 .set({
+              'about': aboutyouController.text,
+              'uid': userCredential.user?.uid,
               'userProfile': newurls,
               'username': fname.text + lname.text,
               'gender': selectedVlaue,
@@ -683,28 +696,28 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
     );
   }
 
-  void _signUp() async {
-    await FirebaseFirestore.instance.collection('userDetails').doc().set({
-      'username': fname.text + lname.text,
-      'gender': selectedVlaue,
-      'dob': selectedDate,
-      'email': emailController.text,
-      'passcode': confirmPasswordController
-    });
-    String Email = emailController.text.trim();
-    String password = passwordController.text.trim();
+  // void gnUp() async {
+  //   await FirebaseFirestore.instance.collection('userDetails').doc().set({
+  //     'username': fname.text + lname.text,
+  //     'gender': selectedVlaue,
+  //     'dob': selectedDate,
+  //     'email': emailController.text,
+  //     'passcode': confirmPasswordController
+  //   });
+  //   String Email = emailController.text.trim();
+  //   String password = passwordController.text.trim();
 
-    User? _user = await _auth.signUpWithEmailAndPassword(Email, password);
+  //   User? _user = await _auth.signUpWithEmailAndPassword(Email, password);
 
-    if (_user != null) {
-      print('User is successfully Created');
-      show_Snackbar('User is successfully created');
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => ImScreen()),
-          (route) => false);
-    }
-  }
+  //   if (_user != null) {
+  //     print('User is successfully Created');
+  //     show_Snackbar('User is successfully created');
+  //     Navigator.pushAndRemoveUntil(
+  //         context,
+  //         MaterialPageRoute(builder: (context) => ImScreen()),
+  //         (route) => false);
+  //   }
+  // }
 
   Future<bool> checkEmailExists(forgetEmailController) async {
     final querySnapshot = await FirebaseFirestore.instance

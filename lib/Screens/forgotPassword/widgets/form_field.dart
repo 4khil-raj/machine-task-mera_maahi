@@ -8,9 +8,11 @@ class CustomTextFormField extends StatelessWidget {
   final Function(String)? onChanged;
   final String? Function(String?)? validator; // Validator function
   final int? maxlength;
+  final int? maxline;
 
   const CustomTextFormField({
     Key? key,
+    this.maxline,
     this.maxlength,
     required this.hintText,
     required this.controller,
@@ -23,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxline ?? 1,
       maxLength: maxlength,
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus?.unfocus();

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
 import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
+import 'package:mere_maahi_dummy/Screens/MatchesScreen/daily.dart';
 import 'package:mere_maahi_dummy/Screens/SplashScreen/splash_service.dart';
 
 class MainScreenNav extends StatefulWidget {
@@ -338,82 +339,6 @@ class _MainScreenNavState extends State<MainScreenNav> {
                 ),
                 trailing: Icon(Icons.arrow_forward_ios_rounded),
               ),
-              // Align(
-              //     alignment: Alignment.topLeft,
-              //     child: Padding(
-              //       padding: const EdgeInsets.only(left: 8),
-              //       child: Text('Premium Matches (68)'),
-              //     )),
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: SizedBox(
-              //     height: 190,
-              //     child: GridView.builder(
-              //         scrollDirection: Axis.horizontal,
-              //         itemCount: images.length,
-              //         gridDelegate:
-              //             const SliverGridDelegateWithFixedCrossAxisCount(
-              //           crossAxisCount: 1,
-              //           crossAxisSpacing: 1.0,
-              //           mainAxisSpacing: 1.0,
-              //         ),
-              //         itemBuilder: (context, index) {
-              //           return Padding(
-              //             padding: const EdgeInsets.all(8.0),
-              //             child: Container(
-              //               color: Colors.white,
-              //               // height: 195,
-              //               width: 145,
-              //               child: Column(
-              //                 children: [
-              //                   SizedBox(
-              //                     height: 10,
-              //                   ),
-              //                   Container(
-              //                     child: Image.asset(
-              //                       images[index],
-              //                       height: 110,
-              //                       width: 140,
-              //                       fit: BoxFit.cover,
-              //                     ),
-              //                   ),
-              //                   Align(
-              //                       alignment: Alignment.topLeft,
-              //                       child: Padding(
-              //                         padding:
-              //                             const EdgeInsets.only(left: 23.0),
-              //                         child: Text(
-              //                           '23 yrs, 5\' 7"',
-              //                           style: TextStyle(fontSize: 10),
-              //                         ),
-              //                       )),
-              //                   Align(
-              //                       alignment: Alignment.topLeft,
-              //                       child: Padding(
-              //                         padding:
-              //                             const EdgeInsets.only(left: 23.0),
-              //                         child: Text(
-              //                           'Malayalam',
-              //                           style: TextStyle(fontSize: 10),
-              //                         ),
-              //                       )),
-              //                   Align(
-              //                       alignment: Alignment.topLeft,
-              //                       child: Padding(
-              //                         padding:
-              //                             const EdgeInsets.only(left: 23.0),
-              //                         child: Text(
-              //                           'Palakad,kerala',
-              //                           style: TextStyle(fontSize: 10),
-              //                         ),
-              //                       ))
-              //                 ],
-              //               ),
-              //             ),
-              //           );
-              //         }),
-              //   ),
-              // ),
               Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
@@ -438,17 +363,29 @@ class _MainScreenNavState extends State<MainScreenNav> {
                           padding: const EdgeInsets.only(left: 10),
                           child: Stack(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                          details[index].profilePic!,
-                                          // fit: BoxFit.fill,
-                                        ))),
-                                // decoration: ,
-                                // height: 150,
+                              InkWell(
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (c) => Daily(
+                                              appbar: true,
+                                              about: details[index].about,
+                                              email: details[index].email,
+                                              image: details[index].profilePic,
+                                              name: details[index].name,
+                                            ))),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                            details[index].profilePic!,
+                                            // fit: BoxFit.fill,
+                                          ))),
+                                  // decoration: ,
+                                  // height: 150,
+                                ),
                               ),
                               Positioned(
                                 bottom: 10,
@@ -470,58 +407,6 @@ class _MainScreenNavState extends State<MainScreenNav> {
                             ],
                           ),
                         );
-                        // Padding(
-                        //             padding: const EdgeInsets.all(8.0),
-                        //             child: Container(
-                        //               color: Colors.white,
-                        //               // height: 195,
-                        //               width: 145,
-                        //               child: Column(
-                        //                 children: [
-                        //                   SizedBox(
-                        //                     height: 10,
-                        //                   ),
-                        //                   Container(
-                        //                       height: 150,
-                        //                       child: Image.network(
-                        //                         details[index].profilePic!,
-                        //                         fit: BoxFit.cover,
-                        //                       )),
-                        //                   Align(
-                        //                       alignment: Alignment.topLeft,
-                        //                       child: Padding(
-                        //                         padding:
-                        //                             const EdgeInsets.only(left: 23.0),
-                        //                         child: Text(
-                        //                           // '23 yrs, 5\' 7"',
-                        //                           details[index].name!,
-                        //                           style: TextStyle(fontSize: 10),
-                        //                         ),
-                        //                       )),
-                        //                   // Align(
-                        //                   //     alignment: Alignment.topLeft,
-                        //                   //     child: Padding(
-                        //                   //       padding:
-                        //                   //           const EdgeInsets.only(left: 23.0),
-                        //                   //       child: Text(
-                        //                   //         'Malayalam',
-                        //                   //         style: TextStyle(fontSize: 10),
-                        //                   //       ),
-                        //                   //     )),
-                        //                   // Align(
-                        //                   //     alignment: Alignment.topLeft,
-                        //                   //     child: Padding(
-                        //                   //       padding:
-                        //                   //           const EdgeInsets.only(left: 23.0),
-                        //                   //       child: Text(
-                        //                   //         'Palakad,kerala',
-                        //                   //         style: TextStyle(fontSize: 10),
-                        //                   //       ),
-                        //                   //     ))
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //           );
                       }),
                 ),
               ),

@@ -1,18 +1,19 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers, use_build_context_synchronously, prefer_final_fields
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers, use_build_context_synchronously, prefer_final_fields, sort_child_properties_last, unnecessary_null_comparison
 
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:mere_maahi_dummy/Screens/Account/accountScreen.dart';
+import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/button.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/widgets/form_field.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -61,6 +62,7 @@ class _EditProfileState extends State<EditProfile> {
     }
   }
 
+  bool loading = false;
   XFile? selectedImage;
   @override
   Widget build(BuildContext context) {
@@ -134,7 +136,6 @@ class _EditProfileState extends State<EditProfile> {
               ),
               IntlPhoneField(
                 decoration: const InputDecoration(
-                  // labelText: 'Phone Number',
                   hintText: 'Phone Number',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -206,25 +207,50 @@ class _EditProfileState extends State<EditProfile> {
               SizedBox(
                 height: 20,
               ),
-              customButton(
-                isRow: false,
-                color: Colors.red[400],
-                height: 60,
-                width: 190,
-                name: 'Update Profile',
-                radius: 20,
-                textclr: Colors.white,
-                onTap: () {
-                  updataProfile();
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: Colors.green,
-                    content: Text('Bio data added successfully'),
-                  ));
-                  Navigator.pop(context);
-                },
-                textsize: 16,
-                borderclr: Colors.red[500],
-              )
+              loading
+                  ? CircularProgressIndicator(
+                      color: Colors.red,
+                    )
+                  : customButton(
+                      isRow: false,
+                      color: Colors.red[400],
+                      height: 60,
+                      width: 190,
+                      name: 'Update Profile',
+                      radius: 20,
+                      textclr: Colors.white,
+                      onTap: () async {
+                        setState(() {
+                          loading = true;
+                        });
+                        if (selectedImage != null &&
+                            namecontroller.text.isNotEmpty &&
+                            _dobController.text.isNotEmpty &&
+                            _selectedValue != null) {
+                          await updataProfile();
+                          await CurrentUserRepo().fetchuserdatas();
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            backgroundColor: Colors.green,
+                            content: Text('Bio data added successfully'),
+                          ));
+
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (c) => MainScreen()),
+                              (route) => false);
+                        } else {
+                          setState(() {
+                            loading = false;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text('fill all Details'),
+                          ));
+                        }
+                      },
+                      textsize: 16,
+                      borderclr: Colors.red[500],
+                    )
             ],
           ),
         ),
@@ -234,13 +260,13 @@ class _EditProfileState extends State<EditProfile> {
 
   Future<void> updataProfile() async {
     final image = await uploadPhoto(selectedImage?.path);
-
-    FirebaseFirestore.instance.collection('Bio-data').doc().set({
-      'photo': image,
-      'name': namecontroller.text + lastnamecontroller.text,
+    final user = FirebaseAuth.instance.currentUser;
+    FirebaseFirestore.instance.collection('userDetails').doc(user?.uid).update({
+      'userProfile': image,
+      'username': namecontroller.text + lastnamecontroller.text,
       "dob": _dobController.text,
       'gender': _selectedValue,
-      'phonenum': phonecontroller,
+      // 'phonenum': phonecontroller,
     });
   }
 }

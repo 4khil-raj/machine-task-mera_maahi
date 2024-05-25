@@ -4,10 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Screens/Account/about_us.dart';
 import 'package:mere_maahi_dummy/Screens/Account/editprofile.dart';
 import 'package:mere_maahi_dummy/Screens/OnboardingScreen/onboardingScreen.dart';
-import 'package:mere_maahi_dummy/Screens/SplashScreen/splash_service.dart';
-import 'package:mere_maahi_dummy/auth/sign_in/signIn_with_email.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 bool swith = false;
 
@@ -54,8 +54,8 @@ Show_DiloagBox(context) {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
-    List? username = userId?.split('@');
-
+    // List? username = userId?.split('@');
+    // setState(() {});
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 230, 236, 231),
       appBar: AppBar(
@@ -275,6 +275,9 @@ class _AccountScreenState extends State<AccountScreen> {
                 child: Column(
                   children: [
                     ListTile(
+                      onTap: () {
+                        _launchTCURL();
+                      },
                       trailing: Icon(Icons.arrow_forward_ios_rounded),
                       title: Text('Help & Support',
                           style: TextStyle(
@@ -288,6 +291,8 @@ class _AccountScreenState extends State<AccountScreen> {
                       ),
                     ),
                     ListTile(
+                      onTap: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (c) => AboutUs())),
                       trailing: Icon(Icons.arrow_forward_ios_rounded),
                       title: Text('About App',
                           style: TextStyle(
@@ -308,5 +313,15 @@ class _AccountScreenState extends State<AccountScreen> {
         ),
       ),
     );
+  }
+
+  void _launchTCURL() async {
+    Uri url = Uri.parse(
+        'https://www.freeprivacypolicy.com/live/4151c397-8eef-442a-95da-48c3275145b2');
+    if (await launchUrl(url)) {
+      //dialer opened
+    } else {
+      SnackBar(content: Text("couldn't launch the page"));
+    }
   }
 }
