@@ -31,6 +31,7 @@ class ForgetPasscodeRepo {
             fontSize: 16.0);
       });
     } else {
+      Navigator.pop(context);
       Fluttertoast.showToast(
           msg: 'Email is not in out database ',
           toastLength: Toast.LENGTH_SHORT,

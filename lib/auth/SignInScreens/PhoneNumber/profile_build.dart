@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mere_maahi_dummy/Const/Style.dart';
+import 'package:mere_maahi_dummy/Const/biodata.dart';
 import 'package:mere_maahi_dummy/Const/const.dart';
 import 'package:mere_maahi_dummy/Const/theme.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
@@ -23,7 +25,13 @@ class OtpProfileBuild extends StatefulWidget {
   State<OtpProfileBuild> createState() => _OtpProfileBuildState();
 }
 
-final aboutyouController = TextEditingController();
+String getRandomBiodata() {
+  final random = Random();
+  int randomIndex = random.nextInt(biodata.length);
+  return biodata[randomIndex];
+}
+
+TextEditingController aboutyouController = TextEditingController();
 final nameController = TextEditingController();
 final emailController = TextEditingController();
 // final dobController = TextEditingController();
@@ -37,6 +45,7 @@ XFile? pickedImage;
 class _OtpProfileBuildState extends State<OtpProfileBuild> {
   @override
   Widget build(BuildContext context) {
+    aboutyouController = TextEditingController(text: getRandomBiodata());
     return Scaffold(
       appBar: AppBar(
         title: Text('Set Profile'),
@@ -217,6 +226,11 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
         'email': emailController.text,
         'passcode': passwordController.text
       });
+      aboutyouController.clear();
+      nameController.clear();
+      selectedDate = null;
+      emailController.clear();
+      passwordController.clear();
     } on FirebaseException catch (e) {
       showDialog(
           context: context,

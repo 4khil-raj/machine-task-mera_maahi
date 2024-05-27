@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:mere_maahi_dummy/auth/SignInScreens/PhoneNumber/otp_repo.dart';
 
 import 'OtpScreen.dart';
@@ -19,13 +20,13 @@ TextEditingController _countryController = TextEditingController();
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _phoneController.dispose();
-    _emailController.dispose();
-    _countryController.dispose();
-  }
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   super.dispose();
+  //   _phoneController.dispose();
+  //   _emailController.dispose();
+  //   _countryController.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,50 +76,66 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
             const SizedBox(
               height: 30,
             ),
-            Container(
-              height: 58,
-              decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(width: 1, color: Color(0xFFE8E6EA)),
-                  borderRadius: BorderRadius.circular(15),
+            IntlPhoneField(
+              decoration: const InputDecoration(
+                hintText: 'Phone Number',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide: BorderSide(),
                 ),
+                prefixIcon: Text('+'),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  SizedBox(
-                    width: 40,
-                    child: TextFormField(
-                      controller: _countryController,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        hintText: '+91',
-                        // suffixIcon: Icon(Icons.keyboard_arrow_down),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                  const Text(
-                    "|",
-                    style: TextStyle(fontSize: 33, color: Colors.grey),
-                  ),
-                  Expanded(
-                      child: TextFormField(
-                    controller: _phoneController,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 10),
-                      border: InputBorder.none,
-                      hintText: "Phone number",
-                    ),
-                    keyboardType: TextInputType.number,
-                  ))
-                ],
-              ),
+              initialCountryCode: 'IN',
+              onChanged: (phone) {
+                setState(() {
+                  _phoneController.text = phone.completeNumber;
+                });
+              },
             ),
+            // Container(
+            //   height: 58,
+            //   decoration: ShapeDecoration(
+            //     color: Colors.white,
+            //     shape: RoundedRectangleBorder(
+            //       side: const BorderSide(width: 1, color: Color(0xFFE8E6EA)),
+            //       borderRadius: BorderRadius.circular(15),
+            //     ),
+            //   ),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       const SizedBox(
+            //         width: 20,
+            //       ),
+            //       SizedBox(
+            //         width: 40,
+            //         child: TextFormField(
+            //           controller: _countryController,
+            //           keyboardType: TextInputType.number,
+            //           decoration: const InputDecoration(
+            //             hintText: '+**',
+            //             // suffixIcon: Icon(Icons.keyboard_arrow_down),
+            //             border: InputBorder.none,
+            //           ),
+            //         ),
+            //       ),
+            //       const Text(
+            //         "|",
+            //         style: TextStyle(fontSize: 33, color: Colors.grey),
+            //       ),
+            //       Expanded(
+            //           child: TextFormField(
+            //         controller: _phoneController,
+            //         decoration: const InputDecoration(
+            //           contentPadding: EdgeInsets.only(left: 10),
+            //           border: InputBorder.none,
+            //           hintText: "Phone number",
+            //         ),
+            //         keyboardType: TextInputType.number,
+            //       ))
+            //     ],
+            //   ),
+            // ),
             // const SizedBox(
             //   height: 54,
             // ),
@@ -164,7 +181,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                   onPressed: () async {
                     await OtpAuthModel().loginWithPhone(
                         phoneNumber:
-                            _countryController.text + _phoneController.text,
+                            // _countryController.text +
+                            _phoneController.text,
                         verificationCompleted:
                             (PhoneAuthCredential credential) {
                           // add(OnOtpAuthenticatedEvent(credential: credential));

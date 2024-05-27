@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
 import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
+import 'package:mere_maahi_dummy/Screens/Account/editprofile.dart';
 import 'package:mere_maahi_dummy/Screens/MatchesScreen/daily.dart';
 import 'package:mere_maahi_dummy/Screens/SplashScreen/splash_service.dart';
 
@@ -157,7 +158,10 @@ class _MainScreenNavState extends State<MainScreenNav> {
                               ),
                             ),
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (c) => EditProfile())),
                                 child: Text(
                                   'Edit Profile',
                                   style: TextStyle(

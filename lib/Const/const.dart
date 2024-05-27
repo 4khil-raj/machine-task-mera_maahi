@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class Const {
   static var kPaddingHorizontal = 20.0;
   static var kPaddingVertical = 10.0;
@@ -7,6 +8,8 @@ class Const {
   static const String deactivate = "deactivate";
   static const String showDialog = "showDialog";
   static const String accessToken = "accessToken";
+
+  static const String agoriAppId = '3c9c58b4037a480499da11fe813ea0b2';
 
   /// user info
   static const String userName = 'userName';

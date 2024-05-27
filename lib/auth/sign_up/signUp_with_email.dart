@@ -1,12 +1,15 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:io';
+import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:mere_maahi_dummy/Const/biodata.dart';
 import 'package:mere_maahi_dummy/Const/theme.dart';
 import 'package:mere_maahi_dummy/Firebase/firebase_auth_services.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
@@ -61,6 +64,19 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
     });
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    aboutyouController = TextEditingController(text: getRandomBiodata());
+  }
+
+  String getRandomBiodata() {
+    final random = Random();
+    int randomIndex = random.nextInt(biodata.length);
+    return biodata[randomIndex];
+  }
+
   ///SnackBar
   void show_Snackbar(String msg) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -69,7 +85,7 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
     ));
   }
 
-  final aboutyouController = TextEditingController();
+  TextEditingController aboutyouController = TextEditingController();
   XFile? selectedImage;
   bool imageselected = false;
   @override
@@ -145,7 +161,18 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
 
                             ///Confirm Password
                             dConfirmPassword(context),
-
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 5, bottom: 5),
+                              child: Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Text(
+                                    'About you',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.w500),
+                                  )),
+                            ),
                             CustomTextFormField(
                               maxline: 5,
                               hintText: 'About You',

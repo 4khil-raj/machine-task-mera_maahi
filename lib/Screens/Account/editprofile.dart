@@ -106,13 +106,13 @@ class _EditProfileState extends State<EditProfile> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Mariya',
+                          userAllDetails?.name ?? 'user',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w600),
                         ),
                       ),
                       Text(
-                        'mariya@gmail.com',
+                        userAllDetails?.email ?? 'u***@gmail.com',
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.w500),
                       )

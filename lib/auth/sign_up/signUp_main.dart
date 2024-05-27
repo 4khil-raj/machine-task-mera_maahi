@@ -12,6 +12,7 @@ import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
 import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
 import 'package:mere_maahi_dummy/auth/SignInScreens/PhoneNumber/profile_build.dart';
 import 'package:mere_maahi_dummy/auth/SignInScreens/signInwithEmailScreen.dart';
+import 'package:mere_maahi_dummy/auth/sign_up/signUp_with_email.dart';
 import '../../Widget/CustomImageViewer.dart';
 import '../../core/utils/image_constant.dart';
 import '../../domain/facebookauth/facebook_auth_helper.dart';
@@ -51,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(SignInWithEmail(), transition: Transition.upToDown);
+                    Get.to(SignUpWithEmail(), transition: Transition.upToDown);
                     // Navigator.push(
                     //     context,
                     //     MaterialPageRoute(
