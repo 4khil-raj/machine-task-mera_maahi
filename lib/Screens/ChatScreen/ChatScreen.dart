@@ -39,29 +39,29 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(top: 8, right: 8),
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                width: 31,
-                height: 31,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 1, color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: CustomImageView(
-                  imagePath: ImageConstant.imgThumbsUpPrimary52x52,
-                  color: Colors.red,
-                ),
-              ),
-            ),
-          )
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.only(top: 8, right: 8),
+        //     child: GestureDetector(
+        //       onTap: () {},
+        //       child: Container(
+        //         width: 31,
+        //         height: 31,
+        //         decoration: ShapeDecoration(
+        //           color: Colors.white,
+        //           shape: RoundedRectangleBorder(
+        //             side: const BorderSide(width: 1, color: Colors.grey),
+        //             borderRadius: BorderRadius.circular(10),
+        //           ),
+        //         ),
+        //         child: CustomImageView(
+        //           imagePath: ImageConstant.imgThumbsUpPrimary52x52,
+        //           color: Colors.red,
+        //         ),
+        //       ),
+        //     ),
+        //   )
+        // ],
       ),
       resizeToAvoidBottomInset: false,
       // appBar: _buildAppBar(context),

@@ -31,7 +31,7 @@ String getRandomBiodata() {
   return biodata[randomIndex];
 }
 
-TextEditingController aboutyouController = TextEditingController();
+// TextEditingController aboutyouController = TextEditingController();
 final nameController = TextEditingController();
 final emailController = TextEditingController();
 // final dobController = TextEditingController();
@@ -45,7 +45,7 @@ XFile? pickedImage;
 class _OtpProfileBuildState extends State<OtpProfileBuild> {
   @override
   Widget build(BuildContext context) {
-    aboutyouController = TextEditingController(text: getRandomBiodata());
+    // aboutyouController = TextEditingController(text: getRandomBiodata());
     return Scaffold(
       appBar: AppBar(
         title: Text('Set Profile'),
@@ -89,14 +89,14 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
                   height: 10,
                 ),
                 buildGender(context),
-                SizedBox(
-                  height: 10,
-                ),
-                CustomTextFormField(
-                  maxline: 5,
-                  hintText: 'About You',
-                  controller: aboutyouController,
-                ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // CustomTextFormField(
+                //   maxline: 5,
+                //   hintText: 'About You',
+                //   controller: aboutyouController,
+                // ),
                 SizedBox(
                   height: 10,
                 ),
@@ -217,7 +217,7 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
           .collection('userDetails')
           .doc(userCredential.user?.uid)
           .set({
-        'about': aboutyouController.text,
+        'about': 'Hey Iam ${nameController.text}',
         'uid': userCredential.user?.uid,
         'userProfile': newurls,
         'username': nameController.text,
@@ -226,7 +226,7 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
         'email': emailController.text,
         'passcode': passwordController.text
       });
-      aboutyouController.clear();
+      // aboutyouController.clear();
       nameController.clear();
       selectedDate = null;
       emailController.clear();
@@ -255,13 +255,16 @@ class _OtpProfileBuildState extends State<OtpProfileBuild> {
     try {
       User? userCredential = FirebaseAuth.instance.currentUser;
       CurrentUserRepo().fetchuserdatas();
+      setState(() {
+        Loading = true;
+      });
       Navigator.push(
           context, MaterialPageRoute(builder: (phone) => const ThisProfile()));
       await FirebaseFirestore.instance
           .collection('userDetails')
           .doc(userCredential?.uid)
           .set({
-        'about': aboutyouController.text,
+        'about': 'Hey Iam ${nameController.text}',
         'uid': userCredential?.uid,
         'userProfile': newurls,
         'username': nameController.text,

@@ -289,7 +289,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         google: true,
                       )));
         } else {
-          CurrentUserRepo().fetchuserdatas();
+          await CurrentUserRepo().fetchuserdatas();
           Navigator.push(context,
               MaterialPageRoute(builder: (phone) => const MainScreen()));
         }

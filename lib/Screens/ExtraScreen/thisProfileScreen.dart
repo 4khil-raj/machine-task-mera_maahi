@@ -24,7 +24,7 @@ class _ThisProfileState extends State<ThisProfile> {
     CurrentUserRepo().fetchuserdatas();
     return SafeArea(
         child: Scaffold(
-      appBar: _buildAppBar(),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -283,7 +283,7 @@ class PassionschipviewItemWidget extends StatelessWidget {
               Text(
                 label,
                 style: TextStyle(
-                  color: isSelected! ? Colors.redAccent : Colors.black,
+                  color: isSelected ? Colors.redAccent : Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                 ),

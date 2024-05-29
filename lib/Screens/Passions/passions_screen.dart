@@ -17,9 +17,8 @@ class PassionsScreen extends StatefulWidget {
 class _PassionsScreenState extends State<PassionsScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: _buildAppBar(),
+    return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -92,7 +91,7 @@ class _PassionsScreenState extends State<PassionsScreen> {
           ),
         ),
       ),
-    ));
+    );
   }
 
   ///AppBar

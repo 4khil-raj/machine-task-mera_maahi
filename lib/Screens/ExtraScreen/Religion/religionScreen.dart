@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import 'package:mere_maahi_dummy/Screens/ExtraScreen/relationship.dart';
 import 'package:mere_maahi_dummy/Screens/Passions/passions_screen.dart';
 
 import '../../../Widget/CustomImageViewer.dart';
 import '../../../core/utils/image_constant.dart';
 
-String? selectedItem2;
+String? selectedReligion;
+String? selectedCommunity;
 
 class DropdownScreen extends StatefulWidget {
   @override
@@ -15,23 +17,36 @@ class DropdownScreen extends StatefulWidget {
 }
 
 class _DropdownScreenState extends State<DropdownScreen> {
-  List<DropdownMenuItem<String>> get dropdownItems {
-    return [
-      const DropdownMenuItem(value: "Hinduism", child: Text("Hinduism")),
-      const DropdownMenuItem(value: "Buddhism", child: Text("Buddhism")),
-      const DropdownMenuItem(value: "Sikhism", child: Text("Sikhism")),
-      const DropdownMenuItem(value: "Islam", child: Text("Islam")),
-      const DropdownMenuItem(value: "Jainism", child: Text("Jainism")),
-      const DropdownMenuItem(value: "Taoism", child: Text("Taoism")),
-      const DropdownMenuItem(
-          value: "Christianity", child: Text("Christianity")),
-    ];
+  final List<String> religions = [
+    'Hinduism',
+    'Christianity',
+    'Islam',
+    'Buddhism',
+    'Sikhism',
+    // Add more religions here
+  ];
+
+  final List<List<String>> communities = [
+    ['Brahmin', 'Kshatriya', 'Vaishya', 'Shudra'], // Communities for Hinduism
+    ['Catholic', 'Protestant', 'Orthodox'], // Communities for Christianity
+    ['Sunni', 'Shia'], // Communities for Islam
+    ['Theravada', 'Mahayana'], // Communities for Buddhism
+    ['Jat', 'Ramgarhia', 'Khatri'], // Communities for Sikhism
+    // Add more communities corresponding to the religions here
+  ];
+
+  List<String> getCommunitiesForSelectedReligion() {
+    if (selectedReligion == null) {
+      return [];
+    }
+    int index = religions.indexOf(selectedReligion!);
+    return communities[index];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: AppBar(),
       body: Form(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +67,7 @@ class _DropdownScreenState extends State<DropdownScreen> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: Text(
-                'His religion',
+                'Religion',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 24,
@@ -64,49 +79,78 @@ class _DropdownScreenState extends State<DropdownScreen> {
             const SizedBox(
               height: 20,
             ),
-            Container(
-                margin: const EdgeInsets.only(left: 15, top: 10, right: 15),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Container(
+                // width:
+                // margin: const EdgeInsets.only(left: 15, top: 10, right: 11),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey[200],
+                  border: Border.all(),
+                  color: Color.fromARGB(255, 255, 255, 255),
                 ),
-                child: FormField<String>(
-                  builder: (FormFieldState<String> state) {
-                    return InputDecorator(
-                      decoration: InputDecoration(
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(12, 10, 20, 20),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15))),
-                      child: DropdownButtonHideUnderline(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButton<String>(
+                    underline: SizedBox(),
+                    isExpanded: true,
+                    hint: Text('Select Religion'),
+                    value: selectedReligion,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedReligion = value;
+                        selectedCommunity =
+                            null; // Reset community when religion changes
+                      });
+                    },
+                    items: religions.map((String religion) {
+                      return DropdownMenuItem<String>(
+                        value: religion,
+                        child: Text(religion),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ),
+            selectedReligion != null
+                ? Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      decoration: BoxDecoration(border: Border.all()),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: DropdownButton<String>(
-                          hint: const Text('Choose Religion'),
-                          value: selectedItem2,
-                          items: dropdownItems,
-                          onChanged: (String? newValue) {
+                          underline: SizedBox(),
+                          hint: Text('Select Community'),
+                          isExpanded: true,
+                          value: selectedCommunity,
+                          onChanged: (value) {
                             setState(() {
-                              selectedItem2 = newValue;
+                              selectedCommunity = value;
                             });
                           },
+                          items: getCommunitiesForSelectedReligion()
+                              .map((String community) {
+                            return DropdownMenuItem<String>(
+                              value: community,
+                              child: Text(community),
+                            );
+                          }).toList(),
                         ),
                       ),
-                    );
-                  },
-                )),
+                    ),
+                  )
+                : SizedBox(),
             const SizedBox(
               height: 90,
             ),
             Center(
               child: InkWell(
                 onTap: () {
-                  if (selectedItem2 != null) {
-                    Get.to(const PassionsScreen(),
+                  if (selectedReligion != null && selectedCommunity != null) {
+                    Get.to(const RelationShip(),
                         transition: Transition.rightToLeftWithFade);
                   }
-                  // Navigator.pushAndRemoveUntil(
-                  //     context,
-                  //     MaterialPageRoute(builder: (builder) => const MainScreen()),
-                  //         (route) => false);
                 },
                 child: Container(
                   width: 295,
@@ -166,31 +210,6 @@ class _DropdownScreenState extends State<DropdownScreen> {
           ),
         ),
       ),
-      // actions: [
-      //   Padding(
-      //     padding: const EdgeInsets.only(top: 12.0, right: 10),
-      //     child: TextButton(
-      //       onPressed: () {
-      //         Get.to(const PassionsScreen(),
-      //             transition: Transition.rightToLeftWithFade);
-      //         // Navigator.pushAndRemoveUntil(
-      //         //     context,
-      //         //     MaterialPageRoute(builder: (builder) => const MainScreen()),
-      //         //         (route) => false);
-      //       },
-      //       child: const Text(
-      //         'Skip',
-      //         style: TextStyle(
-      //           color: Color(0xFFE94057),
-      //           fontSize: 16,
-      //           fontFamily: 'Sk-Modernist',
-      //           fontWeight: FontWeight.w700,
-      //           height: 0.09,
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ],
     );
   }
 }

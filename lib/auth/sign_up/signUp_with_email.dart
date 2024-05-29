@@ -53,22 +53,22 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
 
   bool isLoading = false;
 
-  _signup(AppState state) {
-    setState(() {
-      isLoading = true;
-      // Perform signup logic here
-      // ...
-      setState(() {
-        isLoading = false;
-      });
-    });
-  }
+  // _sgnup(AppState state) {
+  //   setState(() {
+  //     isLoading = true;
+  //     // Perform signup logic here
+  //     // ...
+  //     setState(() {
+  //       isLoading = false;
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    aboutyouController = TextEditingController(text: getRandomBiodata());
+    // aboutyouController = TextEditingController(text: getRandomBiodata());
   }
 
   String getRandomBiodata() {
@@ -85,7 +85,7 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
     ));
   }
 
-  TextEditingController aboutyouController = TextEditingController();
+  // TextEditingController aboutyouController = TextEditingController();
   XFile? selectedImage;
   bool imageselected = false;
   @override
@@ -161,29 +161,29 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
 
                             ///Confirm Password
                             dConfirmPassword(context),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 5, bottom: 5),
-                              child: Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Text(
-                                    'About you',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w500),
-                                  )),
-                            ),
-                            CustomTextFormField(
-                              maxline: 5,
-                              hintText: 'About You',
-                              controller: aboutyouController,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            )
+                            // Padding(
+                            //   padding:
+                            //       const EdgeInsets.only(left: 5, bottom: 5),
+                            //   child: Align(
+                            //       alignment: Alignment.bottomLeft,
+                            //       child: Text(
+                            //         'About you',
+                            //         style: TextStyle(
+                            //             color: Colors.red,
+                            //             fontWeight: FontWeight.w500),
+                            //       )),
+                            // ),
+                            // CustomTextFormField(
+                            //   maxline: 5,
+                            //   hintText: 'About You',
+                            //   controller: aboutyouController,
+                            // ),
+                            // SizedBox(
+                            //   height: 10,
+                            // )
 
                             ///SignUp Button
-                            ,
+
                             buildSignUpButton(context),
                             others()
                           ],
@@ -636,7 +636,7 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
                 .collection('userDetails')
                 .doc(userCredential.user!.uid)
                 .set({
-              'about': aboutyouController.text,
+              'about': 'Hey Iam ${fname.text + lname.text}',
               'uid': userCredential.user?.uid,
               'userProfile': newurls,
               'username': fname.text + lname.text,
@@ -701,10 +701,6 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
             TextButton(
               onPressed: () {
                 Get.to(const SignInScreen(), transition: Transition.downToUp);
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (builder) => const SignInScreen()));
               },
               child: const Text(
                 ' Sign In',
@@ -722,29 +718,6 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
       ],
     );
   }
-
-  // void gnUp() async {
-  //   await FirebaseFirestore.instance.collection('userDetails').doc().set({
-  //     'username': fname.text + lname.text,
-  //     'gender': selectedVlaue,
-  //     'dob': selectedDate,
-  //     'email': emailController.text,
-  //     'passcode': confirmPasswordController
-  //   });
-  //   String Email = emailController.text.trim();
-  //   String password = passwordController.text.trim();
-
-  //   User? _user = await _auth.signUpWithEmailAndPassword(Email, password);
-
-  //   if (_user != null) {
-  //     print('User is successfully Created');
-  //     show_Snackbar('User is successfully created');
-  //     Navigator.pushAndRemoveUntil(
-  //         context,
-  //         MaterialPageRoute(builder: (context) => ImScreen()),
-  //         (route) => false);
-  //   }
-  // }
 
   Future<bool> checkEmailExists(forgetEmailController) async {
     final querySnapshot = await FirebaseFirestore.instance

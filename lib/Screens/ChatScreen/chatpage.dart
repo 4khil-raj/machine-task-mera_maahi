@@ -2,10 +2,13 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
 import 'package:mere_maahi_dummy/Screens/ChatScreen/chatbubble.dart';
 import 'package:mere_maahi_dummy/Screens/ChatScreen/repo.dart';
 import 'package:mere_maahi_dummy/Screens/SplashScreen/splash_service.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/widgets/form_field.dart';
+import 'package:mere_maahi_dummy/call/calling.dart';
 
 class ChatPage extends StatelessWidget {
   final String receiverEmail;
@@ -32,6 +35,39 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (c) => CallInvitation(
+                              video: false,
+                              callId: receiverID,
+                              username: userAllDetails?.name,
+                              userId: receiverID,
+                            )));
+                // callactionButton(false, receiverID, name);
+              },
+              icon: Icon(Icons.call)),
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (c) => CallInvitation(
+                              video: true,
+                              callId: receiverID,
+                              username: name,
+                              userId: userAllDetails?.name,
+                            )));
+                // callactionButton(false, receiverID, name);
+              },
+              icon: Icon(Icons.video_call_rounded)),
+          SizedBox(
+            width: 10,
+          )
+        ],
         title: Row(
           children: [
             CircleAvatar(
