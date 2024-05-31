@@ -1,18 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
-import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
 import 'package:mere_maahi_dummy/Screens/Account/accountScreen.dart';
 import 'package:mere_maahi_dummy/Screens/ChatScreen/ChatScreen.dart';
-import 'package:mere_maahi_dummy/Screens/ExtraScreen/Religion/religionScreen.dart';
-import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
 import 'package:mere_maahi_dummy/Screens/HomeScreen/main_screen_nav.dart';
 import 'package:mere_maahi_dummy/Screens/MatchesScreen/matches_screen.dart';
-import 'package:mere_maahi_dummy/Screens/Passions/PassionchipViewItem.dart';
-
-// CurrentUserModel? users;
-
-// List<UserFetchModel>? userFetchModel;
+import 'package:mere_maahi_dummy/application/bottom_nav_bloc/bottom_nav_bloc.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -22,19 +15,12 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
-
   static final List<Widget> _widgetOptions = <Widget>[
     const MainScreenNav(),
     const MatchesScreen(),
     const ChatScreen(),
     const AccountScreen()
   ];
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   void initState() {
@@ -42,69 +28,43 @@ class _MainScreenState extends State<MainScreen> {
     CurrentUserRepo().fetchuserdatas();
   }
 
-  // void get() async {
-  //   User? user;
-  //   user = FirebaseAuth.instance.currentUser;
-  //   final data =
-  //       await FirebaseFirestore.instance.collection('userDetails').doc().get();
-  //   final theUser = data.data();
-  //   users = CurrentUserModel(
-  //     email: theUser?['email'],
-  //   );
-  //   print(users?.email);
-  // }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+    return BlocBuilder<BottomNavBloc, BottomNavState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: Center(
+            child: _widgetOptions.elementAt(state.emittedIndex),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: 'Matches',
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.people),
+                label: 'Matches',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.chat),
+                label: 'Chat',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle),
+                label: 'Account',
+              ),
+            ],
+            currentIndex: state.emittedIndex,
+            selectedItemColor: Colors.red,
+            unselectedItemColor: Colors.black,
+            onTap: (index) => BlocProvider.of<BottomNavBloc>(context)
+                .add(BottomnavcallEvent(currentIndex: index)),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Account',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.red,
-        unselectedItemColor: Colors.black,
-        onTap: _onItemTapped,
-      ),
+        );
+      },
     );
   }
 }
-
-
-///
-/// ElevatedButton(
-//             style:
-//                 ElevatedButton.styleFrom(backgroundColor: Colors.purpleAccent),
-//             onPressed: () {
-//               FirebaseAuth.instance.signOut();
-//               Navigator.pushAndRemoveUntil(
-//                   context,
-//                   MaterialPageRoute(
-//                       builder: (builder) => const OnboardingThreeScreen()),
-//                   (route) => false);
-//             },
-//             child: const Text(
-//               'SingOut',
-//               style: TextStyle(color: Colors.white),
-//             ),
-//           ),

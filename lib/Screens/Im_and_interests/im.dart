@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/Religion/religionScreen.dart';
 import 'package:mere_maahi_dummy/Screens/Passions/passions_screen.dart';
 import 'package:mere_maahi_dummy/core/app_export.dart';
@@ -35,8 +35,9 @@ class _ImScreenState extends State<ImScreen> {
               InkWell(
                 onTap: () {
                   if (selectedOption != null) {
-                    Get.to(DropdownScreen(),
-                        transition: Transition.rightToLeft);
+                    // Get.to(DropdownScreen(),
+                    //     transition: Transition.rightToLeft);
+                    customNavPush(context, DropdownScreen());
                   }
                 },
                 child: Container(
@@ -104,7 +105,8 @@ class _ImScreenState extends State<ImScreen> {
           padding: const EdgeInsets.only(top: 12.0, right: 10),
           child: TextButton(
             onPressed: () {
-              Get.to(DropdownScreen(), transition: Transition.zoom);
+              // Get.to(DropdownScreen(), transition: Transition.zoom);
+              customNavPush(context, DropdownScreen());
             },
             child: const Text(
               'Skip',

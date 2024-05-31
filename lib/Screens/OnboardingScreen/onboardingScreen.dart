@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/Passions/passions_screen.dart';
 import 'package:mere_maahi_dummy/auth/sign_in/signIn_with_email.dart';
 import 'package:mere_maahi_dummy/auth/sign_up/signUp_main.dart';
@@ -17,12 +17,14 @@ class _OnboardingThreeScreenState extends State<OnboardingThreeScreen> {
   int _sliderIndex = 0;
 
   final List<Widget> _sliderItems = [
+    Image.asset('assets/images/slider1.jpeg',
+        fit: BoxFit.cover), // Assuming img1.jpg is in your assets folder
     Image.asset(
-        'assets/images/img5.jpg'), // Assuming img1.jpg is in your assets folder
+        fit: BoxFit.cover,
+        'assets/images/slider2.jpeg'), // Assuming img2.jpg is in your assets folder
     Image.asset(
-        'assets/images/img4.jpg'), // Assuming img2.jpg is in your assets folder
-    Image.asset(
-        'assets/images/img.jpg'), // Assuming img3.jpg is in your assets folder
+        fit: BoxFit.cover,
+        'assets/images/2b7975a8c0121a4a98ae881ae018a465.jpeg'), // Assuming img3.jpg is in your assets folder
   ];
 
   final List<Widget> _text = [
@@ -113,8 +115,7 @@ class _OnboardingThreeScreenState extends State<OnboardingThreeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(const SignUpScreen(),
-                        transition: Transition.rightToLeftWithFade);
+                    customNavPush(context, SignUpScreen);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -173,8 +174,9 @@ class _OnboardingThreeScreenState extends State<OnboardingThreeScreen> {
             ),
             TextButton(
               onPressed: () {
-                Get.to(const SignInScreen(),
-                    transition: Transition.rightToLeft);
+                // Get.to(const SignInScreen(),
+                //     transition: Transition.rightToLeft);
+                customNavPush(context, SignInScreen());
                 // Navigator.push(
                 //     context,
                 //     MaterialPageRoute(
@@ -207,7 +209,7 @@ class _OnboardingThreeScreenState extends State<OnboardingThreeScreen> {
           height: 400, // Adjust height as needed
           initialPage: 1,
           autoPlay: true,
-          autoPlayInterval: const Duration(seconds: 4), // Slide every 3 seconds
+          autoPlayInterval: const Duration(seconds: 3), // Slide every 3 seconds
           autoPlayAnimationDuration:
               const Duration(milliseconds: 900), // Animation duration
           viewportFraction: 0.67,
@@ -222,7 +224,7 @@ class _OnboardingThreeScreenState extends State<OnboardingThreeScreen> {
         itemCount: _sliderItems.length,
         itemBuilder: (context, index, realIndex) {
           return ClipRRect(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(22),
               child: _sliderItems[index]);
         },
       ),

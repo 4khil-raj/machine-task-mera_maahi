@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/routes/transitions_type.dart';
+// import 'package:get/get.dart';
+// import 'package:get/get_core/src/get_main.dart';
+// import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/relationship.dart';
 import 'package:mere_maahi_dummy/Screens/Passions/passions_screen.dart';
 
@@ -148,8 +149,9 @@ class _DropdownScreenState extends State<DropdownScreen> {
               child: InkWell(
                 onTap: () {
                   if (selectedReligion != null && selectedCommunity != null) {
-                    Get.to(const RelationShip(),
-                        transition: Transition.rightToLeftWithFade);
+                    // Get.to(const RelationShip(),
+                    //     transition: Transition.rightToLeftWithFade);
+                    customNavPush(context, RelationShip());
                   }
                 },
                 child: Container(

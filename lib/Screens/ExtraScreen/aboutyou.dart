@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:mere_maahi_dummy/Const/biodata.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/addphotos.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/select_contry.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/widgets/form_field.dart';
@@ -71,8 +71,9 @@ class _AboutYouState extends State<AboutYou> {
             InkWell(
               onTap: () async {
                 if (aboutyouController.text.isNotEmpty) {
-                  Get.to(const AddYourPhotos(),
-                      transition: Transition.rightToLeftWithFade);
+                  // Get.to(const AddYourPhotos(),
+                  // transition: Transition.rightToLeftWithFade);
+                  customNavPush(context, AddYourPhotos());
                   await updateAbout();
                   CurrentUserRepo().fetchuserdatas();
                 } else {

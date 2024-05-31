@@ -5,9 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
 import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
 import 'package:mere_maahi_dummy/auth/SignInScreens/PhoneNumber/profile_build.dart';
@@ -52,11 +53,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(SignUpWithEmail(), transition: Transition.upToDown);
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (builder) => const SignUpWithEmail()));
+                    // Get.to(SignUpWithEmail(), transition: Transition.upToDown);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => const SignUpWithEmail()));
                   },
                   child: Container(
                     width: 295,
@@ -87,8 +88,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(const PhoneNumberScreen(),
-                        transition: Transition.downToUp);
+                    // Get.to(const PhoneNumberScreen(),
+                    //     transition: Transition.downToUp);
+                    customNavPush(context, PhoneNumberScreen());
                   },
                   child: Container(
                     width: 295,

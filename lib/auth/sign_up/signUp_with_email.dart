@@ -4,26 +4,21 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:mere_maahi_dummy/Const/biodata.dart';
 import 'package:mere_maahi_dummy/Const/theme.dart';
 import 'package:mere_maahi_dummy/Firebase/firebase_auth_services.dart';
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
-import 'package:mere_maahi_dummy/Screens/forgotPassword/widgets/form_field.dart';
 import 'package:mere_maahi_dummy/auth/sign_in/signIn_with_email.dart';
 import 'package:mere_maahi_dummy/components/common_input.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import '../../Const/Style.dart';
 import '../../Const/const.dart';
-import "../../Screens/Im_and_interests/im.dart";
-import '../../app/appState.dart';
 import '../../helpers/deviceInfo.dart';
 
 var newUrl;
@@ -700,7 +695,8 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
             ),
             TextButton(
               onPressed: () {
-                Get.to(const SignInScreen(), transition: Transition.downToUp);
+                customNavPush(context, SignInScreen());
+                // Get.to(const SignInScreen(), transition: Transition.downToUp);
               },
               child: const Text(
                 ' Sign In',

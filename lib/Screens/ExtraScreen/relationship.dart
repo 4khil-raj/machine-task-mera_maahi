@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/select_contry.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
 import 'package:mere_maahi_dummy/Screens/Passions/passions_screen.dart';
@@ -104,8 +105,9 @@ class _RelationShipState extends State<RelationShip> {
               child: InkWell(
                 onTap: () {
                   if (relationShip != null) {
-                    Get.to(const SelectContry(),
-                        transition: Transition.rightToLeftWithFade);
+                    // Get.to(const SelectContry(),
+                    //     transition: Transition.rightToLeftWithFade);
+                    customNavPush(context, SelectContry());
                   }
                   // Navigator.pushAndRemoveUntil(
                   //     context,

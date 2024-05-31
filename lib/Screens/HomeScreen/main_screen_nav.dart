@@ -90,16 +90,17 @@ class _MainScreenNavState extends State<MainScreenNav> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 12, right: 12),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.panorama_horizontal_select_sharp,
-                        color: Colors.transparent,
-                      ),
-                      Text('My Shaadi',
+                      // Icon(
+                      //   Icons.panorama_horizontal_select_sharp,
+                      //   color: Colors.transparent,
+                      // ),
+                      Text('Mera Maahi',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500)),
-                      Icon(CupertinoIcons.bell)
+                      // Icon(CupertinoIcons.bell)
                     ],
                   ),
                 ),
@@ -223,8 +224,7 @@ class _MainScreenNavState extends State<MainScreenNav> {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20))),
-                  child:
-                      Image.asset('assets/images/shaadicom-banner-mobile.jpg'),
+                  child: Image.asset('assets/images/meramaahicover.jpg'),
                 ),
               ),
               Padding(

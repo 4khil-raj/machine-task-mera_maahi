@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/routes/transitions_type.dart';
+
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/aboutyou.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/addphotos.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
@@ -99,14 +98,14 @@ class _WorkingorNotState extends State<WorkingorNot> {
                   onTap: () {
                     if (areyouworking != null) {
                       if (working == false) {
-                        Get.to(const AboutYou(),
-                            transition: Transition.rightToLeftWithFade);
+                        // Get.to(const AboutYou(),
+                        //     transition: Transition.rightToLeftWithFade);
+                        customNavPush(context, AboutYou());
                       } else if (working &&
                           jobtitleController.text.isNotEmpty &&
                           companynameController.text.isNotEmpty &&
                           whereisController.text.isNotEmpty) {
-                        Get.to(const AboutYou(),
-                            transition: Transition.rightToLeftWithFade);
+                        customNavPush(context, AboutYou());
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('fill all details'),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+// import 'package:get/get.dart';
+// import 'package:get/get_core/src/get_main.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/DoB/dateOfBirthScreen.dart';
 
 import '../../Widget/CustomImageViewer.dart';
@@ -68,8 +69,9 @@ class _ThisProfileState extends State<ThisProfile> {
                 child: InkWell(
                   onTap: () {
                     if (selectedLabel1 != null) {
-                      Get.to(DropdownScreen(),
-                          transition: Transition.rightToLeftWithFade);
+                      // Get.to(DropdownScreen(),
+                      //     transition: Transition.rightToLeftWithFade);
+                      customNavPush(context, DropdownScreen());
                     }
                     // Navigator.pushAndRemoveUntil(
                     //     context,

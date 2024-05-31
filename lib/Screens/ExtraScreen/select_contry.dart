@@ -1,7 +1,7 @@
 import 'package:country_state_city_picker/country_state_city_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/eductation.dart';
 import 'package:mere_maahi_dummy/Widget/CustomImageViewer.dart';
 import 'package:mere_maahi_dummy/core/utils/image_constant.dart';
@@ -115,8 +115,9 @@ class _SelectContryState extends State<SelectContry> {
               child: InkWell(
                 onTap: () {
                   if (state != null && country != null && city != null) {
-                    Get.to(const EducationQualification(),
-                        transition: Transition.rightToLeftWithFade);
+                    // Get.to(const EducationQualification(),
+                    //     transition: Transition.rightToLeftWithFade);
+                    customNavPush(context, EducationQualification());
                   }
                   // Navigator.pushAndRemoveUntil(
                   //     context,

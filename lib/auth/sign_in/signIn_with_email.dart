@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/forgotPassword_screen.dart';
 import 'package:mere_maahi_dummy/auth/sign_up/signUp_with_email.dart';
@@ -321,8 +322,9 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             TextButton(
               onPressed: () {
-                Get.to(SignUpWithEmail(),
-                    transition: Transition.upToDown); // Navigator.push(
+                customNavPush(context, SignUpWithEmail());
+
+                // Navigator.push(
                 //     context,
                 //     MaterialPageRoute(
                 //         builder: (builder) => const SignUpWithEmail()));

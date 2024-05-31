@@ -2,9 +2,8 @@
 
 import 'package:country_state_city_picker/country_state_city_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/routes/transitions_type.dart';
+
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/job_status.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/widgets/form_field.dart';
 import 'package:mere_maahi_dummy/Widget/CustomImageViewer.dart';
@@ -124,8 +123,7 @@ class _EducationQualificationState extends State<EducationQualification> {
                     if (graduateController.text.isNotEmpty &&
                         univercityController.text.isNotEmpty &&
                         stateController.text.isNotEmpty) {
-                      Get.to(const WorkingorNot(),
-                          transition: Transition.rightToLeftWithFade);
+                      customNavPush(context, WorkingorNot());
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text('Fill the Details'),

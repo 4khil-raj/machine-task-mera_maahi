@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_navigation/src/routes/transitions_type.dart';
+
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/ExtraScreen/Religion/religionScreen.dart';
 import 'package:mere_maahi_dummy/Screens/Im_and_interests/im.dart';
 
@@ -146,7 +145,8 @@ class _DOBPickerScreenState extends State<DOBPickerScreen> {
             InkWell(
               onTap: () {
                 if (selectedOption != null) {
-                  Get.to(DropdownScreen(), transition: Transition.rightToLeft);
+                  // Get.to(DropdownScreen(), transition: Transition.rightToLeft);
+                  customNavPush(context, DropdownScreen());
                 }
               },
               child: Container(
@@ -239,106 +239,3 @@ class _DOBPickerScreenState extends State<DOBPickerScreen> {
     );
   }
 }
-
-//
-// class DOBPickerScreen extends StatefulWidget {
-//   @override
-//   _DOBPickerScreenState createState() => _DOBPickerScreenState();
-// }
-//
-// class _DOBPickerScreenState extends State<DOBPickerScreen> {
-//   late DateTime _selectedDate;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     // Initialize selected date to current date
-//     _selectedDate = DateTime.now();
-//
-//     // Postpone the execution of _selectDate until after the build is complete
-//     WidgetsBinding.instance?.addPostFrameCallback((_) {
-//       _selectDate(context);
-//     });
-//   }
-//
-//   Future<void> _selectDate(BuildContext context) async {
-//     final DateTime? picked = await showDatePicker(
-//       context: context,
-//       initialDate: _selectedDate,
-//       firstDate: DateTime(1900),
-//       lastDate: DateTime.now(),
-//     );
-//     if (picked != null && picked != _selectedDate) {
-//       setState(() {
-//         _selectedDate = picked;
-//       });
-//     }
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Select Date of Birth'),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             Text(
-//               'Selected Date:',
-//               style: TextStyle(fontSize: 20),
-//             ),
-//             SizedBox(height: 10),
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 Container(
-//                   padding: EdgeInsets.all(10),
-//                   decoration: BoxDecoration(
-//                     border: Border.all(color: Colors.grey),
-//                     borderRadius: BorderRadius.circular(5),
-//                   ),
-//                   child: Text(
-//                     '${_selectedDate.month}',
-//                     style: TextStyle(fontSize: 16),
-//                   ),
-//                 ),
-//                 const SizedBox(width: 10),
-//                 Container(
-//                   width: 50,
-//                   padding: const EdgeInsets.all(10),
-//                   decoration: BoxDecoration(
-//                     border: Border.all(color: Colors.grey),
-//                     borderRadius: BorderRadius.circular(5),
-//                   ),
-//                   child: Text(
-//                     '${_selectedDate.day}',
-//                     style: const TextStyle(fontSize: 16),
-//                   ),
-//                 ),
-//                 const SizedBox(width: 10),
-//                 Container(
-//                   padding: const EdgeInsets.all(10),
-//                   decoration: BoxDecoration(
-//                     border: Border.all(color: Colors.grey),
-//                     borderRadius: BorderRadius.circular(5),
-//                   ),
-//                   child: Text(
-//                     '${_selectedDate.year}',
-//                     style: const TextStyle(fontSize: 16),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             const SizedBox(height: 20),
-//             ElevatedButton(
-//               onPressed: () => _selectDate(context),
-//               child: const Text('Select Date'),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

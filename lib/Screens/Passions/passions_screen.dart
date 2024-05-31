@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+// import 'package:get/get.dart';
+// import 'package:get/get_core/src/get_main.dart';
+import 'package:mere_maahi_dummy/Screens/ExtraScreen/savebutton.dart';
 import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
 import 'package:mere_maahi_dummy/Screens/Passions/PassionchipViewItem.dart';
 
@@ -56,6 +57,7 @@ class _PassionsScreenState extends State<PassionsScreen> {
               ),
               InkWell(
                 onTap: () {
+                  saveProfile();
                   // Get.to(const SignUpScreen(),transition: Transition.rightToLeftWithFade);
                   Navigator.pushAndRemoveUntil(
                       context,
