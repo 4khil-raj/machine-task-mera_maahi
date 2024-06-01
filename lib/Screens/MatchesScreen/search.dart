@@ -46,7 +46,6 @@ class _SearchMatchesState extends State<Newmaches> {
                       padding: const EdgeInsets.all(11.0),
                       child: Stack(children: [
                         Container(
-                          // height: 400,.
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20)),
@@ -64,13 +63,13 @@ class _SearchMatchesState extends State<Newmaches> {
                                     children: [
                                       Text(
                                         details[index].name!,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Color.fromARGB(
                                                 255, 255, 255, 255),
                                             fontSize: 27,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 8,
                                       ),
                                       Icon(
@@ -79,17 +78,18 @@ class _SearchMatchesState extends State<Newmaches> {
                                       )
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 15,
                                   ),
-                                  Text('21 yrs, 5\'2"  Not Working',
+                                  const Text('21 yrs, 5\'2"  Not Working',
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color:
                                             Color.fromARGB(255, 255, 255, 255),
                                       )),
-                                  Text('Malayalam, Ezhava  Idukki, Kerala',
+                                  const Text(
+                                      'Malayalam, Ezhava  Idukki, Kerala',
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,

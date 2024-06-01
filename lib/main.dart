@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mere_maahi_dummy/Screens/Account/premium/premium.dart';
 import 'package:mere_maahi_dummy/application/bottom_nav_bloc/bottom_nav_bloc.dart';
+import 'package:mere_maahi_dummy/application/partner_pref/partner_pref_bloc.dart';
 import 'package:mere_maahi_dummy/firebase_options.dart';
 import 'package:mere_maahi_dummy/routes/app_routes.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => BottomNavBloc(),
+          ),
+          BlocProvider(
+            create: (context) => PartnerPrefBloc(),
           ),
         ],
         child: MaterialApp(

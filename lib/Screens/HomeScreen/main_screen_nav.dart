@@ -11,8 +11,12 @@ import 'package:flutter/widgets.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
 import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
 import 'package:mere_maahi_dummy/Screens/Account/editprofile.dart';
+import 'package:mere_maahi_dummy/Screens/Account/premium/astro_details/astro.dart';
+import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/MatchesScreen/daily.dart';
 import 'package:mere_maahi_dummy/Screens/SplashScreen/splash_service.dart';
+import 'package:mere_maahi_dummy/Screens/partner_preferences/partner_preferences.dart';
+import 'package:mere_maahi_dummy/Screens/partner_preferences/widget/basic.dart';
 
 class MainScreenNav extends StatefulWidget {
   const MainScreenNav({super.key});
@@ -420,22 +424,25 @@ class _MainScreenNavState extends State<MainScreenNav> {
                     padding: const EdgeInsets.only(left: 8),
                     child: Text('Options & Setting'),
                   )),
-              Container(
-                color: Colors.white,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 5, bottom: 5, left: 10, right: 10),
-                      child: Icon(Icons.people),
-                    ),
-                    Text('Partner Preferences'),
-                    Spacer(),
-                    Icon(Icons.arrow_forward_ios),
-                    SizedBox(
-                      width: 10,
-                    )
-                  ],
+              InkWell(
+                onTap: () => customNavPush(context, PartnerPreferences()),
+                child: Container(
+                  color: Colors.white,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
+                        child: Icon(Icons.people),
+                      ),
+                      Text('Partner Preferences'),
+                      Spacer(),
+                      Icon(Icons.arrow_forward_ios),
+                      SizedBox(
+                        width: 10,
+                      )
+                    ],
+                  ),
                 ),
               ),
               Container(
@@ -456,22 +463,25 @@ class _MainScreenNavState extends State<MainScreenNav> {
                   ],
                 ),
               ),
-              Container(
-                color: Colors.white,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 5, bottom: 5, left: 10, right: 10),
-                      child: Icon(Icons.settings),
-                    ),
-                    Text('Account settings'),
-                    Spacer(),
-                    Icon(Icons.arrow_forward_ios),
-                    SizedBox(
-                      width: 10,
-                    )
-                  ],
+              InkWell(
+                onTap: () => customNavPush(context, AstroDetailScreen()),
+                child: Container(
+                  color: Colors.white,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
+                        child: Icon(Icons.settings),
+                      ),
+                      Text('Account settings'),
+                      Spacer(),
+                      Icon(Icons.arrow_forward_ios),
+                      SizedBox(
+                        width: 10,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ],
