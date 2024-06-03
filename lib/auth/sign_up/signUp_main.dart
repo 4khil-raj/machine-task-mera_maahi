@@ -9,14 +9,11 @@ import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
 import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
-import 'package:mere_maahi_dummy/Screens/ExtraScreen/thisProfileScreen.dart';
 import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
 import 'package:mere_maahi_dummy/auth/SignInScreens/PhoneNumber/profile_build.dart';
-import 'package:mere_maahi_dummy/auth/SignInScreens/signInwithEmailScreen.dart';
 import 'package:mere_maahi_dummy/auth/sign_up/signUp_with_email.dart';
 import '../../Widget/CustomImageViewer.dart';
 import '../../core/utils/image_constant.dart';
-import '../../domain/facebookauth/facebook_auth_helper.dart';
 import '../SignInScreens/PhoneNumber/phoneNumberScreen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -36,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         body: SingleChildScrollView(
           child: Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 47),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 47),
             child: Column(
               children: [
                 const SizedBox(
@@ -45,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 CustomImageView(
                     imagePath: ImageConstant.imgRttrecjb9yqkfjt207x214,
                     height: 307,
-                    width: 254,
+                    // width: 250,
                     alignment: Alignment.centerLeft,
                     margin: const EdgeInsets.only(left: 24)),
                 const SizedBox(

@@ -1,16 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
-import 'package:mere_maahi_dummy/Screens/Passions/passions_screen.dart';
 import 'package:mere_maahi_dummy/auth/sign_in/signIn_with_email.dart';
 import 'package:mere_maahi_dummy/auth/sign_up/signUp_main.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingThreeScreen extends StatefulWidget {
-  const OnboardingThreeScreen({Key? key}) : super(key: key);
+  const OnboardingThreeScreen({super.key});
 
   @override
-  _OnboardingThreeScreenState createState() => _OnboardingThreeScreenState();
+  State<OnboardingThreeScreen> createState() => _OnboardingThreeScreenState();
 }
 
 class _OnboardingThreeScreenState extends State<OnboardingThreeScreen> {
@@ -115,11 +114,7 @@ class _OnboardingThreeScreenState extends State<OnboardingThreeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    customNavPush(context, SignUpScreen);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (builder) => const SignUpScreen()));
+                    customNavPush(context, const SignUpScreen());
                   },
                   child: Container(
                     width: 295,
@@ -174,13 +169,7 @@ class _OnboardingThreeScreenState extends State<OnboardingThreeScreen> {
             ),
             TextButton(
               onPressed: () {
-                // Get.to(const SignInScreen(),
-                //     transition: Transition.rightToLeft);
-                customNavPush(context, SignInScreen());
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (builder) => const SignInScreen()));
+                customNavPush(context, const SignInScreen());
               },
               child: const Text(
                 ' Sign In',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/button.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/widgets/form_field.dart';
+import 'package:mere_maahi_dummy/core/utils/image_constant.dart';
 import 'package:mere_maahi_dummy/forget_repo/forget_pass_repo.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
@@ -22,7 +23,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Forget Password'),
+          title: const Text('Forget Password'),
         ),
         body: Center(
             child: Padding(
@@ -30,8 +31,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Container(
+                        height: 180,
+                        // child: Image.asset(
+                        //     ImageConstant.imgRttrecjb9yqkfjt207x214),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    ImageConstant.imgRttrecjb9yqkfjt207x214))),
+                      ),
                       GradientText(
-                        colors: [
+                        colors: const [
                           Colors.black,
                           Colors.red,
                         ],
@@ -39,7 +49,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w600, fontSize: 23),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       CustomTextFormField(
@@ -47,11 +57,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         controller: forgetEmailController,
                         keyboardType: TextInputType.emailAddress,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 24,
                       ),
                       loading
-                          ? CircularProgressIndicator(
+                          ? const CircularProgressIndicator(
                               color: Colors.red,
                             )
                           : customButton(

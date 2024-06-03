@@ -12,7 +12,6 @@ import '../../Const/Style.dart';
 import '../../Const/const.dart';
 import '../../Const/theme.dart';
 import '../../Firebase/firebase_auth_services.dart';
-import "../../Screens/Im_and_interests/im.dart";
 import '../../components/common_input.dart';
 import '../../helpers/deviceInfo.dart';
 

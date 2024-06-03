@@ -32,6 +32,9 @@ class _WorkingorNotState extends State<WorkingorNot> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              SizedBox(
+                height: 20,
+              ),
               const Center(
                 child: CircleAvatar(
                   // backgroundImage: NetworkImage(
@@ -239,19 +242,19 @@ class _WorkingorNotState extends State<WorkingorNot> {
             ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 70, right: 70),
-          child: PassionschipviewItemWidget(
-            label: 'Iam Studying',
-            isSelected: areyouworking == 'Iam Studying',
-            onSelect: () {
-              setState(() {
-                working = false;
-                areyouworking = 'Iam Studying';
-              });
-            },
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(left: 70, right: 70),
+        //   child: PassionschipviewItemWidget(
+        //     label: 'Iam Studying',
+        //     isSelected: areyouworking == 'Iam Studying',
+        //     onSelect: () {
+        //       setState(() {
+        //         working = false;
+        //         areyouworking = 'Iam Studying';
+        //       });
+        //     },
+        //   ),
+        // ),
       ],
     );
   }

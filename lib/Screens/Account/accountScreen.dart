@@ -3,9 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
-import 'package:mere_maahi_dummy/Screens/Account/about_us.dart';
-import 'package:mere_maahi_dummy/Screens/Account/editprofile.dart';
+
 import 'package:mere_maahi_dummy/Screens/Account/widgets/bottom_container.dart';
 import 'package:mere_maahi_dummy/Screens/Account/widgets/top_container.dart';
 import 'package:mere_maahi_dummy/Screens/Account/widgets/userdetails.dart';
