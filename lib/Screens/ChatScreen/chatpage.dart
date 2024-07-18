@@ -35,34 +35,34 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (c) => CallInvitation(
-                              video: false,
-                              callId: receiverID,
-                              username: userAllDetails?.name,
-                              userId: receiverID,
-                            )));
-                // callactionButton(false, receiverID, name);
-              },
-              icon: Icon(Icons.call)),
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (c) => CallInvitation(
-                              video: true,
-                              callId: receiverID,
-                              username: name,
-                              userId: userAllDetails?.name,
-                            )));
-                // callactionButton(false, receiverID, name);
-              },
-              icon: Icon(Icons.video_call_rounded)),
+          // IconButton(
+          //     onPressed: () {
+          //       Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (c) => CallInvitation(
+          //                     video: false,
+          //                     callId: receiverID,
+          //                     username: userAllDetails?.name,
+          //                     userId: receiverID,
+          //                   )));
+          //       // callactionButton(false, receiverID, name);
+          //     },
+          //     icon: Icon(Icons.call)),
+          // IconButton(
+          //     onPressed: () {
+          //       Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (c) => CallInvitation(
+          //                     video: true,
+          //                     callId: receiverID,
+          //                     username: name,
+          //                     userId: userAllDetails?.name,
+          //                   )));
+          //       // callactionButton(false, receiverID, name);
+          //     },
+          //     icon: Icon(Icons.video_call_rounded)),
           SizedBox(
             width: 10,
           )
