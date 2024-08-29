@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mere_maahi_dummy/application/auth/auth_bloc_bloc.dart';
 import 'package:mere_maahi_dummy/auth/SignInScreens/PhoneNumber/profile_build.dart';
 // import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:pinput/pinput.dart';
@@ -10,7 +12,8 @@ import 'package:pinput/pinput.dart';
 var otpid;
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
+  OtpScreen({this.email, super.key});
+  String? email;
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -140,28 +143,37 @@ class _OtpScreenState extends State<OtpScreen> {
                   submittedPinTheme: submittedPinTheme,
                   showCursor: true,
                   onCompleted: (d) {
-                    PhoneAuthCredential credential =
-                        PhoneAuthProvider.credential(
-                            verificationId: otpid, smsCode: otpcontroller.text);
-                    if (credential != null) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (phone) => const OtpProfileBuild(
-                                    google: false,
-                                  )));
+                    if (widget.email != null) {
+                      BlocProvider.of<AuthBlocBloc>(context).add(
+                          OtpValidateEvent(
+                              email: widget.email ?? '',
+                              context: context,
+                              otp: otpcontroller.text));
                     } else {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                                content: Text('Some Error Occurs'),
-                                actions: [
-                                  TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: Text('ok'))
-                                ]);
-                          });
+                      PhoneAuthCredential credential =
+                          PhoneAuthProvider.credential(
+                              verificationId: otpid,
+                              smsCode: otpcontroller.text);
+                      if (credential != null) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (phone) => const OtpProfileBuild(
+                                      google: false,
+                                    )));
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                  content: Text('Some Error Occurs'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        child: Text('ok'))
+                                  ]);
+                            });
+                      }
                     }
                   }),
               const SizedBox(

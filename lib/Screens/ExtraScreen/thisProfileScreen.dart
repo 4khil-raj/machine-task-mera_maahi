@@ -10,7 +10,7 @@ import '../../core/utils/image_constant.dart';
 import "../Im_and_interests/im.dart";
 import 'Religion/religionScreen.dart';
 
-String? selectedLabel1;
+String? signUpProfileFor;
 
 class ThisProfile extends StatefulWidget {
   const ThisProfile({super.key});
@@ -68,7 +68,7 @@ class _ThisProfileState extends State<ThisProfile> {
               Center(
                 child: InkWell(
                   onTap: () {
-                    if (selectedLabel1 != null) {
+                    if (signUpProfileFor != null) {
                       // Get.to(DropdownScreen(),
                       //     transition: Transition.rightToLeftWithFade);
                       customNavPush(context, DropdownScreen());
@@ -121,10 +121,10 @@ class _ThisProfileState extends State<ThisProfile> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'Myself',
-                isSelected: selectedLabel1 == 'Myself',
+                isSelected: signUpProfileFor == 'Myself',
                 onSelect: () {
                   setState(() {
-                    selectedLabel1 = 'Myself';
+                    signUpProfileFor = 'Myself';
                   });
                 },
               ),
@@ -132,10 +132,10 @@ class _ThisProfileState extends State<ThisProfile> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'My Son',
-                isSelected: selectedLabel1 == 'My Son',
+                isSelected: signUpProfileFor == 'My Son',
                 onSelect: () {
                   setState(() {
-                    selectedLabel1 = 'My Son';
+                    signUpProfileFor = 'My Son';
                   });
                 },
               ),
@@ -148,10 +148,10 @@ class _ThisProfileState extends State<ThisProfile> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'My Daughter',
-                isSelected: selectedLabel1 == 'My Daughter',
+                isSelected: signUpProfileFor == 'My Daughter',
                 onSelect: () {
                   setState(() {
-                    selectedLabel1 = 'My Daughter';
+                    signUpProfileFor = 'My Daughter';
                   });
                 },
               ),
@@ -159,10 +159,10 @@ class _ThisProfileState extends State<ThisProfile> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'My Sister',
-                isSelected: selectedLabel1 == 'My Sister',
+                isSelected: signUpProfileFor == 'My Sister',
                 onSelect: () {
                   setState(() {
-                    selectedLabel1 = 'My Sister';
+                    signUpProfileFor = 'My Sister';
                   });
                 },
               ),
@@ -175,10 +175,10 @@ class _ThisProfileState extends State<ThisProfile> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'My Friends',
-                isSelected: selectedLabel1 == 'My Friends',
+                isSelected: signUpProfileFor == 'My Friends',
                 onSelect: () {
                   setState(() {
-                    selectedLabel1 = 'My Friends';
+                    signUpProfileFor = 'My Friends';
                   });
                 },
               ),
@@ -186,10 +186,10 @@ class _ThisProfileState extends State<ThisProfile> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'My Relative',
-                isSelected: selectedLabel1 == 'My Relative',
+                isSelected: signUpProfileFor == 'My Relative',
                 onSelect: () {
                   setState(() {
-                    selectedLabel1 = 'My Relative';
+                    signUpProfileFor = 'My Relative';
                   });
                 },
               ),

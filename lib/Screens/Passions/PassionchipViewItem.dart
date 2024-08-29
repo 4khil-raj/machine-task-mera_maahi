@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-String? Selectedpassionlables;
+// String? Selectedpassionlables;
+List<String> Selectedpassionlables = [];
 
 class PassionChipViewItem extends StatefulWidget {
   final IconData avatarsIcons;
@@ -19,7 +20,7 @@ class _PassionChipViewItemState extends State<PassionChipViewItem> {
   bool isSelected = false;
   @override
   Widget build(BuildContext context) {
-    Selectedpassionlables = widget.labels;
+    // Selectedpassionlables = widget.labels;
     return RawChip(
       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 17),
       showCheckmark: false,
@@ -52,7 +53,7 @@ class _PassionChipViewItemState extends State<PassionChipViewItem> {
       onSelected: (value) {
         setState(() {
           isSelected = value;
-          Selectedpassionlables = widget.labels;
+          Selectedpassionlables.add(widget.labels);
         });
       },
     );

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
+import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
 import 'package:mere_maahi_dummy/Screens/Account/accountScreen.dart';
 import 'package:mere_maahi_dummy/Screens/ChatScreen/ChatScreen.dart';
 import 'package:mere_maahi_dummy/Screens/HomeScreen/main_screen_nav.dart';
 import 'package:mere_maahi_dummy/Screens/MatchesScreen/matches_screen.dart';
 import 'package:mere_maahi_dummy/application/bottom_nav_bloc/bottom_nav_bloc.dart';
+import 'package:mere_maahi_dummy/application/matches/matches_fetch_bloc.dart';
+import 'package:mere_maahi_dummy/application/user/userdetails_bloc.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -30,6 +33,12 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<UserdetailsBloc>(context).add(FetchUserDetails());
+    FetchAlUsersDatas().fetchdata();
+    CurrentUserRepo().fetchuserdatas();
+    BlocProvider.of<MatchesFetchBloc>(context).add(RandomUserEvent());
+    BlocProvider.of<MatchesFetchBloc>(context).add(RequestEvent());
+
     return BlocBuilder<BottomNavBloc, BottomNavState>(
       builder: (context, state) {
         return Scaffold(

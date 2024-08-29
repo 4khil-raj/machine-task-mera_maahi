@@ -12,10 +12,10 @@ import 'package:mere_maahi_dummy/Screens/Passions/PassionchipViewItem.dart';
 
 Future<void> saveProfile() async {
   var obj = {
-    'this Profile for': selectedLabel1,
-    'religion': selectedReligion,
-    'community': selectedCommunity,
-    'relationship': relationShip,
+    'this Profile for': signUpProfileFor,
+    'religion': signUpselectedCommunity,
+    'community': signUpselectedReligion,
+    'relationship': signUprelationShip,
     'location': '$country,$state,$city',
     'education':
         '${graduateController.text},${univercityController.text},${stateController.text}',
@@ -30,16 +30,15 @@ Future<void> saveProfile() async {
     'image4': image4,
     'passion': Selectedpassionlables
   };
-  print(obj);
   if (jobtitleController.text.isEmpty) {
     FirebaseFirestore.instance
         .collection('Profile')
         .doc(userAllDetails?.uid)
         .set({
-      'this Profile for': selectedLabel1,
-      'religion': selectedReligion,
-      'community': selectedCommunity,
-      'relationship': relationShip,
+      'this Profile for': signUpProfileFor,
+      'religion': signUpselectedCommunity,
+      'community': signUpselectedReligion,
+      'relationship': signUprelationShip,
       'location': '$country,$state,$city',
       'education':
           '${graduateController.text},${univercityController.text},${stateController.text}',

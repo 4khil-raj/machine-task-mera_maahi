@@ -21,7 +21,13 @@ import '../../Const/Style.dart';
 import '../../Const/const.dart';
 import '../../helpers/deviceInfo.dart';
 
-var newUrl;
+final TextEditingController signUpfname = TextEditingController();
+TextEditingController signUplname = TextEditingController();
+TextEditingController signUpemailController = TextEditingController();
+TextEditingController signUppasswordController = TextEditingController();
+TextEditingController signUpconfirmPasswordController = TextEditingController();
+dynamic signUpselectedGender;
+dynamic singUpselectedDateOfBirth;
 
 class SignUpWithEmail extends StatefulWidget {
   const SignUpWithEmail({
@@ -34,12 +40,6 @@ class SignUpWithEmail extends StatefulWidget {
 
 class _SignUpWithEmailState extends State<SignUpWithEmail> {
   final FirebaseAuthService _auth = FirebaseAuthService();
-
-  final TextEditingController fname = TextEditingController();
-  TextEditingController lname = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   late bool _isObscure = true;
@@ -114,29 +114,8 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
                             ///onBehalf
                             // buildOnBehalf(context),
 
-                            InkWell(
-                                onTap: () async {
-                                  XFile? image = await ImagePicker()
-                                      .pickImage(source: ImageSource.gallery);
-                                  setState(() {
-                                    selectedImage = image;
-                                  });
-                                },
-                                child: CircleAvatar(
-                                  backgroundImage: selectedImage != null
-                                      ? FileImage(
-                                          File('${selectedImage?.path}'))
-                                      : null,
-                                  child: selectedImage == null
-                                      ? Icon(Icons.add_a_photo)
-                                      : null,
-                                  backgroundColor:
-                                      Color.fromARGB(255, 255, 17, 0),
-                                  radius: 45,
-                                ))
-
                             ///First Name
-                            ,
+
                             buildFirstName(context),
 
                             ///Last Name
@@ -156,28 +135,6 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
 
                             ///Confirm Password
                             dConfirmPassword(context),
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.only(left: 5, bottom: 5),
-                            //   child: Align(
-                            //       alignment: Alignment.bottomLeft,
-                            //       child: Text(
-                            //         'About you',
-                            //         style: TextStyle(
-                            //             color: Colors.red,
-                            //             fontWeight: FontWeight.w500),
-                            //       )),
-                            // ),
-                            // CustomTextFormField(
-                            //   maxline: 5,
-                            //   hintText: 'About You',
-                            //   controller: aboutyouController,
-                            // ),
-                            // SizedBox(
-                            //   height: 10,
-                            // )
-
-                            ///SignUp Button
 
                             buildSignUpButton(context),
                             others()
@@ -288,7 +245,7 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
           height: 5,
         ),
         TextFormField(
-          controller: fname,
+          controller: signUpfname,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter First Name';
@@ -296,6 +253,9 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
             return null;
           },
           decoration: InputStyle.inputDecoration_text_field(hint: 'Saket'),
+        ),
+        const SizedBox(
+          height: 20,
         )
       ],
     );
@@ -314,7 +274,7 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
           height: 5,
         ),
         TextFormField(
-          controller: lname,
+          controller: signUplname,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter First Name';
@@ -322,12 +282,13 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
             return null;
           },
           decoration: InputStyle.inputDecoration_text_field(hint: 'kumar'),
+        ),
+        const SizedBox(
+          height: 20,
         )
       ],
     );
   }
-
-  dynamic selectedVlaue;
 
   ///Gender
   buildGender(BuildContext context) {
@@ -356,19 +317,17 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
             }).toList(),
             onChanged: (value) {
               setState(() {
-                selectedVlaue = value;
+                signUpselectedGender = value;
               });
             },
           ),
         ),
         const SizedBox(
-          height: 10,
+          height: 20,
         ),
       ],
     );
   }
-
-  dynamic selectedDate;
 
   ///Dob(Date of Birth)
   buildDob(BuildContext context) {
@@ -412,7 +371,7 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
                 return;
               }
               setState(() {
-                selectedDate = newDate;
+                singUpselectedDateOfBirth = newDate;
               });
             },
             child: Container(
@@ -423,9 +382,12 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
                 children: [
                   Center(
                     child: Text(
-                      selectedDate == null
+                      singUpselectedDateOfBirth == null
                           ? '20/05/2008'
-                          : selectedDate.toString().split(' ').first,
+                          : singUpselectedDateOfBirth
+                              .toString()
+                              .split(' ')
+                              .first,
                       style: Styles.regular_app_accent_14,
                     ),
                   ),
@@ -456,7 +418,7 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
           height: 5,
         ),
         TextFormField(
-          controller: emailController,
+          controller: signUpemailController,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter Email';
@@ -467,7 +429,10 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
             return null;
           },
           decoration:
-              InputStyle.inputDecoration_text_field(hint: 'che@gmail.com'),
+              InputStyle.inputDecoration_text_field(hint: 'che@gmai.com'),
+        ),
+        const SizedBox(
+          height: 20,
         )
       ],
     );
@@ -489,7 +454,7 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
           height: 5,
         ),
         TextFormField(
-            controller: passwordController,
+            controller: signUppasswordController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter password';
@@ -524,9 +489,9 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
             textAlign: TextAlign.right,
           ),
         ),
-        const SizedBox(
-          height: 20,
-        ),
+        // const SizedBox(
+        //   height: 20,
+        // ),
       ],
     );
   }
@@ -547,13 +512,13 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
           height: 5,
         ),
         TextFormField(
-          controller: confirmPasswordController,
+          controller: signUpconfirmPasswordController,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please Enter Confirm Password';
             }
-            if (passwordController.text.toString() !=
-                confirmPasswordController.text.toString()) {
+            if (signUppasswordController.text.toString() !=
+                signUpconfirmPasswordController.text.toString()) {
               return "Password don't match";
             }
             return null;
@@ -583,98 +548,90 @@ class _SignUpWithEmailState extends State<SignUpWithEmail> {
   /// SignUp Button
   buildSignUpButton(BuildContext context) {
     return InkWell(
-      onTap: () async {
-        setState(() {
-          isLoading = true;
-        });
-        bool emailExists = await checkEmailExists(emailController.text);
-        if (emailExists) {
-          return showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                    content: const Text('The Email is Alredy Exists'),
-                    actions: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            setState(() {
-                              isLoading = false;
-                            });
-                          },
-                          child: const Text('Ok'))
-                    ]);
-              });
-        } else {
+        onTap: () async {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const ThisProfile()));
           setState(() {
             isLoading = true;
-            Future<void>.delayed(const Duration(seconds: 2), () {
-              setState(() {
-                isLoading = false;
-              });
-              if (true) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ThisProfile()));
-              }
-              // _signUp();
-            });
           });
-          final newurls = await postPhoto(selectedImage?.path);
-          UserCredential userCredential = await FirebaseAuth.instance
-              .createUserWithEmailAndPassword(
-                  email: emailController.text,
-                  password: passwordController.text);
-          try {
-            await FirebaseFirestore.instance
-                .collection('userDetails')
-                .doc(userCredential.user!.uid)
-                .set({
-              'about': 'Hey Iam ${fname.text + lname.text}',
-              'uid': userCredential.user?.uid,
-              'userProfile': newurls,
-              'username': fname.text + lname.text,
-              'gender': selectedVlaue,
-              'dob': selectedDate,
-              'email': emailController.text,
-              'passcode': confirmPasswordController.text
-            });
-          } on FirebaseException catch (e) {
+          bool emailExists = await checkEmailExists(signUpemailController.text);
+          if (emailExists) {
             return showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                      content: Text(e.message.toString()),
+                      content: const Text('The Email is Alredy Exists'),
                       actions: [
                         TextButton(
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: () {
+                              Navigator.pop(context);
+                              setState(() {
+                                isLoading = false;
+                              });
+                            },
                             child: const Text('Ok'))
                       ]);
                 });
+          } else {
+            setState(() {
+              isLoading = true;
+              Future<void>.delayed(const Duration(seconds: 2), () {
+                setState(() {
+                  isLoading = false;
+                });
+                if (true) {}
+                // _signUp();
+              });
+            });
+            final newurls = await postPhoto(selectedImage?.path);
+            UserCredential userCredential = await FirebaseAuth.instance
+                .createUserWithEmailAndPassword(
+                    email: signUpemailController.text,
+                    password: signUppasswordController.text);
+            try {
+              await FirebaseFirestore.instance
+                  .collection('userDetails')
+                  .doc(userCredential.user!.uid)
+                  .set({
+                'about': 'Hey Iam ${signUpfname.text + signUplname.text}',
+                'uid': userCredential.user?.uid,
+                'userProfile': newurls,
+                'username': signUpfname.text + signUplname.text,
+                'gender': signUpselectedGender,
+                'dob': singUpselectedDateOfBirth,
+                'email': signUpemailController.text,
+                'passcode': signUpconfirmPasswordController.text
+              });
+            } on FirebaseException catch (e) {
+              return showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                        content: Text(e.message.toString()),
+                        actions: [
+                          TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('Ok'))
+                        ]);
+                  });
+            }
           }
-        }
-      },
-      child: isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : Container(
-              height: 50,
-              width: DeviceInfo(context).width,
-              decoration: BoxDecoration(
-                gradient: Styles.buildLinearGradient(
-                    begin: Alignment.centerLeft, end: Alignment.centerRight),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(12),
-                ),
+        },
+        child: Container(
+            height: 50,
+            width: DeviceInfo(context).width,
+            decoration: BoxDecoration(
+              gradient: Styles.buildLinearGradient(
+                  begin: Alignment.centerLeft, end: Alignment.centerRight),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(12),
               ),
-              child: Center(
-                  child: Text(
-                'Sign Up',
-                style: Styles.bold_white_10,
-              ))),
-    );
+            ),
+            child: Center(
+                child: Text(
+              'Sign Up',
+              style: Styles.bold_white_10,
+            ))));
   }
 
   Widget others() {

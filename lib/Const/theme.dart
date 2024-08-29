@@ -26,6 +26,6 @@ class MyTheme {
   static Color success = Color.fromRGBO(133, 181, 103, 1);
   static Color failure = Color.fromRGBO(217, 77, 75, 1);
 
-  static Color gradient_color_1 = Color.fromRGBO(253, 48, 110, 1);
+  static Color gradient_color_1 = const Color.fromRGBO(253, 48, 110, 1);
   static Color gradient_color_2 = Color.fromRGBO(255, 87, 65, 1);
 }

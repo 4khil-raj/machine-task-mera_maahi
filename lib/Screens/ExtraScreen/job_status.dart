@@ -103,12 +103,12 @@ class _WorkingorNotState extends State<WorkingorNot> {
                       if (working == false) {
                         // Get.to(const AboutYou(),
                         //     transition: Transition.rightToLeftWithFade);
-                        customNavPush(context, AboutYou());
+                        customNavPush(context, const AboutYou());
                       } else if (working &&
                           jobtitleController.text.isNotEmpty &&
                           companynameController.text.isNotEmpty &&
                           whereisController.text.isNotEmpty) {
-                        customNavPush(context, AboutYou());
+                        customNavPush(context, const AboutYou());
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('fill all details'),

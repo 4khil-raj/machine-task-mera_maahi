@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mere_maahi_dummy/Const/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../helpers/deviceInfo.dart';
+
 var white = MyTheme.white;
 var green = MyTheme.green;
 var arsenic = MyTheme.arsenic;
@@ -13,18 +14,17 @@ var solitude = MyTheme.solitude;
 
 class Styles {
   /// styles 10
-
   static var regular_gull_grey_10 =
-  GoogleFonts.poppins(textStyle: TextStyle(color: gull_grey, fontSize: 10));
+      GoogleFonts.poppins(textStyle: TextStyle(color: gull_grey, fontSize: 10));
   static var regular_white_10 =
-  GoogleFonts.poppins(textStyle: TextStyle(color: white, fontSize: 10));
+      GoogleFonts.poppins(textStyle: TextStyle(color: white, fontSize: 10));
   static var italic_app_accent_10_underline = GoogleFonts.poppins(
       textStyle: TextStyle(
-        fontStyle: FontStyle.italic,
-        fontSize: 10,
-        color: MyTheme.app_accent_color,
-        decoration: TextDecoration.underline,
-      ));
+    fontStyle: FontStyle.italic,
+    fontSize: 10,
+    color: MyTheme.app_accent_color,
+    decoration: TextDecoration.underline,
+  ));
   static var bold_white_10 = GoogleFonts.poppins(
       textStyle: TextStyle(
           color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold));
@@ -37,39 +37,39 @@ class Styles {
   /// styles 12
 
   static var regular_white_12 =
-  GoogleFonts.poppins(textStyle: TextStyle(color: white, fontSize: 12));
+      GoogleFonts.poppins(textStyle: TextStyle(color: white, fontSize: 12));
   static var regular_gull_grey_12 =
-  GoogleFonts.poppins(textStyle: TextStyle(color: gull_grey, fontSize: 12));
+      GoogleFonts.poppins(textStyle: TextStyle(color: gull_grey, fontSize: 12));
   static var regular_app_accent_12 = GoogleFonts.poppins(
       textStyle: TextStyle(color: app_accent_color, fontSize: 12));
   static var regular_arsenic_12 = GoogleFonts.poppins(
       textStyle: TextStyle(color: arsenic, fontSize: 12)); // regular
   static var regular_storm_grey_12 = GoogleFonts.poppins(
       textStyle: TextStyle(
-        color: storm_grey,
-        fontSize: 12,
-      ));
+    color: storm_grey,
+    fontSize: 12,
+  ));
   static var regular_light_grey_12 = GoogleFonts.poppins(
       textStyle: TextStyle(color: light_grey, fontSize: 12));
   static var regular_solitude_12 =
-  GoogleFonts.poppins(textStyle: TextStyle(color: solitude, fontSize: 12));
+      GoogleFonts.poppins(textStyle: TextStyle(color: solitude, fontSize: 12));
   static var regular_solitude_12_line_through = GoogleFonts.poppins(
       textStyle: TextStyle(
-        color: solitude,
-        fontSize: 12,
-        decoration: TextDecoration.lineThrough,
-        decorationColor: solitude,
-      ));
+    color: solitude,
+    fontSize: 12,
+    decoration: TextDecoration.lineThrough,
+    decorationColor: solitude,
+  ));
   static var regular_white_12_line_through = GoogleFonts.poppins(
       textStyle: TextStyle(
-        color: solitude,
-        fontSize: 12,
-        decoration: TextDecoration.lineThrough,
-        decorationColor: white,
-      ));
+    color: solitude,
+    fontSize: 12,
+    decoration: TextDecoration.lineThrough,
+    decorationColor: white,
+  ));
   static var bold_white_12 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: white, fontSize: 12, fontWeight: FontWeight.bold));
+          TextStyle(color: white, fontSize: 12, fontWeight: FontWeight.bold));
   static var bold_light_grey_12 = GoogleFonts.poppins(
       textStyle: TextStyle(
           color: light_grey, fontSize: 12, fontWeight: FontWeight.bold));
@@ -78,16 +78,16 @@ class Styles {
           color: gull_grey, fontSize: 12, fontWeight: FontWeight.bold));
   static var medium_white_12 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: white, fontSize: 12, fontWeight: FontWeight.w500));
+          TextStyle(color: white, fontSize: 12, fontWeight: FontWeight.w500));
   static var medium_arsenic_12_line_through = GoogleFonts.poppins(
       textStyle: TextStyle(
-        color: MyTheme.arsenic,
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
-        decoration: TextDecoration.lineThrough,
-        decorationColor: Colors.black,
-        decorationStyle: TextDecorationStyle.solid,
-      ));
+    color: MyTheme.arsenic,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    decoration: TextDecoration.lineThrough,
+    decorationColor: Colors.black,
+    decorationStyle: TextDecorationStyle.solid,
+  ));
   static var bold_app_accent_12 = GoogleFonts.poppins(
       textStyle: TextStyle(
           color: app_accent_color, fontSize: 12, fontWeight: FontWeight.bold));
@@ -125,11 +125,11 @@ class Styles {
   /// style 14
   static var regular_white_14 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8), fontSize: 14));
+          TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8), fontSize: 14));
   static var regular_app_accent_14 = GoogleFonts.poppins(
       textStyle: TextStyle(color: app_accent_color, fontSize: 14));
   static var regular_arsenic_14 =
-  GoogleFonts.poppins(textStyle: TextStyle(color: arsenic, fontSize: 14));
+      GoogleFonts.poppins(textStyle: TextStyle(color: arsenic, fontSize: 14));
   static var regular_arsenic_14_line_through = GoogleFonts.poppins(
       textStyle: TextStyle(
           color: arsenic,
@@ -139,11 +139,11 @@ class Styles {
 
   static var italic_white_14 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: white, fontSize: 14, fontStyle: FontStyle.italic));
+          TextStyle(color: white, fontSize: 14, fontStyle: FontStyle.italic));
 
   static var medium_arsenic_14 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: arsenic, fontSize: 14, fontWeight: FontWeight.w600));
+          TextStyle(color: arsenic, fontSize: 14, fontWeight: FontWeight.w600));
   static var medium_gull_grey_14 = GoogleFonts.poppins(
       textStyle: TextStyle(
           color: MyTheme.gull_grey,
@@ -159,24 +159,24 @@ class Styles {
 
   static var bold_arsenic_14 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: arsenic, fontSize: 14, fontWeight: FontWeight.bold));
+          TextStyle(color: arsenic, fontSize: 14, fontWeight: FontWeight.bold));
   static var bold_white_14 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: white, fontSize: 14, fontWeight: FontWeight.bold));
+          TextStyle(color: white, fontSize: 14, fontWeight: FontWeight.bold));
   static var bold_white_14_line_through = GoogleFonts.poppins(
       textStyle: TextStyle(
-        color: white,
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-        decoration: TextDecoration.lineThrough,
-        decorationColor: Colors.black,
-        decorationStyle: TextDecorationStyle.solid,
-      ));
+    color: white,
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    decoration: TextDecoration.lineThrough,
+    decorationColor: Colors.black,
+    decorationStyle: TextDecorationStyle.solid,
+  ));
   static var bold_app_accent_14 = GoogleFonts.poppins(
       textStyle: TextStyle(
-        color: app_accent_color,
-        fontWeight: FontWeight.bold,
-      ));
+    color: app_accent_color,
+    fontWeight: FontWeight.bold,
+  ));
 
   /// style 16
 
@@ -184,13 +184,13 @@ class Styles {
       textStyle: TextStyle(color: MyTheme.gull_grey, fontSize: 16));
   static var bold_white_16 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: white, fontWeight: FontWeight.bold, fontSize: 16));
+          TextStyle(color: white, fontWeight: FontWeight.bold, fontSize: 16));
   static var bold_app_accent_16 = GoogleFonts.poppins(
       textStyle: TextStyle(
           color: app_accent_color, fontWeight: FontWeight.bold, fontSize: 16));
   static var bold_arsenic_16 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: arsenic, fontWeight: FontWeight.bold, fontSize: 16));
+          TextStyle(color: arsenic, fontWeight: FontWeight.bold, fontSize: 16));
   static var medium_white_16 = GoogleFonts.poppins(
       textStyle: TextStyle(
           letterSpacing: 3,
@@ -202,19 +202,19 @@ class Styles {
   /// style 20
   static var bold_app_accent_20 = GoogleFonts.poppins(
       textStyle: TextStyle(
-        color: MyTheme.app_accent_color,
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ));
+    color: MyTheme.app_accent_color,
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  ));
 
   /// style 22
 
   static var medium_white_22 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: white, fontSize: 22, fontWeight: FontWeight.w600));
+          TextStyle(color: white, fontSize: 22, fontWeight: FontWeight.w600));
   static var bold_white_22 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: white, fontSize: 22, fontWeight: FontWeight.bold));
+          TextStyle(color: white, fontSize: 22, fontWeight: FontWeight.bold));
   static var bold_app_accent_22 = GoogleFonts.poppins(
       textStyle: TextStyle(
           color: app_accent_color, fontSize: 22, fontWeight: FontWeight.bold));
@@ -223,7 +223,7 @@ class Styles {
 
   static var bold_white_30 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: white, fontSize: 30, fontWeight: FontWeight.bold));
+          TextStyle(color: white, fontSize: 30, fontWeight: FontWeight.bold));
   static var bold_app_accent_30 = GoogleFonts.poppins(
       textStyle: TextStyle(
           color: app_accent_color, fontSize: 30, fontWeight: FontWeight.bold));
@@ -235,7 +235,7 @@ class Styles {
 
   static var bold_white_36 = GoogleFonts.poppins(
       textStyle:
-      TextStyle(color: white, fontSize: 36, fontWeight: FontWeight.w500));
+          TextStyle(color: white, fontSize: 36, fontWeight: FontWeight.w500));
 
   static LinearGradient buildLinearGradient({required begin, required end}) {
     return LinearGradient(
@@ -251,7 +251,7 @@ class Styles {
       textStyle: TextStyle(
           color: white, fontSize: DeviceInfo(context).width! / 100 * size));
   static regularWhiteBold(
-      BuildContext context, double size) =>
+          BuildContext context, double size) =>
       GoogleFonts.poppins(
           textStyle: TextStyle(
               color: white,

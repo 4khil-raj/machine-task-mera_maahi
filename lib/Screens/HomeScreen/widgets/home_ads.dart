@@ -3,11 +3,21 @@
 import 'package:flutter/material.dart';
 import 'package:mere_maahi_dummy/Firebase/fechalldata.dart';
 
-class HomeScreenAds extends StatelessWidget {
+dynamic newmachesCount = 0;
+
+class HomeScreenAds extends StatefulWidget {
   const HomeScreenAds({super.key});
 
   @override
+  State<HomeScreenAds> createState() => _HomeScreenAdsState();
+}
+
+class _HomeScreenAdsState extends State<HomeScreenAds> {
+  @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(milliseconds: 1), () {
+      setState(() {});
+    });
     return Column(
       children: [
         Padding(
@@ -99,7 +109,7 @@ class HomeScreenAds extends StatelessWidget {
             alignment: Alignment.topLeft,
             child: Padding(
               padding: const EdgeInsets.only(left: 8),
-              child: Text('New Matches (${details.length})'),
+              child: Text('New Matches (${newmachesCount})'),
             )),
       ],
     );

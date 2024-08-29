@@ -117,7 +117,7 @@ class _SelectContryState extends State<SelectContry> {
                   if (state != null && country != null && city != null) {
                     // Get.to(const EducationQualification(),
                     //     transition: Transition.rightToLeftWithFade);
-                    customNavPush(context, EducationQualification());
+                    customNavPush(context, const EducationQualification());
                   }
                   // Navigator.pushAndRemoveUntil(
                   //     context,

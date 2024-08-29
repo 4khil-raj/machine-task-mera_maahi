@@ -8,6 +8,7 @@ import 'package:mere_maahi_dummy/Screens/Account/widgets/bottom_container.dart';
 import 'package:mere_maahi_dummy/Screens/Account/widgets/top_container.dart';
 import 'package:mere_maahi_dummy/Screens/Account/widgets/userdetails.dart';
 import 'package:mere_maahi_dummy/Screens/OnboardingScreen/onboardingScreen.dart';
+import 'package:mere_maahi_dummy/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 bool swith = false;
@@ -48,7 +49,7 @@ Show_DiloagBox(context) {
                     textStyle: Theme.of(context).textTheme.labelMedium),
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
-
+                  clearLoginInfo();
                   //After SignOut we easily Navigate to LoginScreen
                   Navigator.push(
                       context,

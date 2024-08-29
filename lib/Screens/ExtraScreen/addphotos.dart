@@ -12,10 +12,14 @@ import 'package:mere_maahi_dummy/Widget/CustomImageViewer.dart';
 import 'package:mere_maahi_dummy/core/utils/image_constant.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-dynamic image1;
-dynamic image2;
-dynamic image3;
-dynamic image4;
+// dynamic image1;
+// dynamic image2;
+// dynamic image3;
+// dynamic image4;
+XFile? image1;
+XFile? image2;
+XFile? image3;
+XFile? image4;
 
 class AddYourPhotos extends StatefulWidget {
   const AddYourPhotos({super.key});
@@ -25,10 +29,6 @@ class AddYourPhotos extends StatefulWidget {
 }
 
 class _AddYourPhotosState extends State<AddYourPhotos> {
-  XFile? addimage1;
-  XFile? addimage2;
-  XFile? addimage3;
-  XFile? addimage4;
   bool loading = false;
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class _AddYourPhotosState extends State<AddYourPhotos> {
                         XFile? image = await ImagePicker()
                             .pickImage(source: ImageSource.gallery);
                         setState(() {
-                          addimage1 = image;
+                          image1 = image;
                         });
                       },
                       child: Container(
@@ -76,12 +76,12 @@ class _AddYourPhotosState extends State<AddYourPhotos> {
                             image: DecorationImage(
                                 image: FileImage(
                                   File(
-                                    addimage1?.path ?? '',
+                                    image1?.path ?? '',
                                   ),
                                 ),
                                 fit: BoxFit.cover),
                             color: Color.fromARGB(255, 252, 184, 179)),
-                        child: addimage1 == null
+                        child: image1 == null
                             ? Icon(
                                 Icons.add,
                                 color: Colors.red,
@@ -97,7 +97,7 @@ class _AddYourPhotosState extends State<AddYourPhotos> {
                         XFile? image = await ImagePicker()
                             .pickImage(source: ImageSource.gallery);
                         setState(() {
-                          addimage2 = image;
+                          image2 = image;
                         });
                       },
                       child: Container(
@@ -105,12 +105,12 @@ class _AddYourPhotosState extends State<AddYourPhotos> {
                             image: DecorationImage(
                                 image: FileImage(
                                   File(
-                                    addimage2?.path ?? '',
+                                    image2?.path ?? '',
                                   ),
                                 ),
                                 fit: BoxFit.cover),
                             color: Color.fromARGB(255, 252, 184, 179)),
-                        child: addimage2 == null
+                        child: image2 == null
                             ? Icon(
                                 Icons.add,
                                 color: Colors.red,
@@ -134,7 +134,7 @@ class _AddYourPhotosState extends State<AddYourPhotos> {
                         XFile? image = await ImagePicker()
                             .pickImage(source: ImageSource.gallery);
                         setState(() {
-                          addimage3 = image;
+                          image3 = image;
                         });
                       },
                       child: Container(
@@ -142,12 +142,12 @@ class _AddYourPhotosState extends State<AddYourPhotos> {
                             image: DecorationImage(
                                 image: FileImage(
                                   File(
-                                    addimage3?.path ?? '',
+                                    image3?.path ?? '',
                                   ),
                                 ),
                                 fit: BoxFit.cover),
                             color: Color.fromARGB(255, 252, 184, 179)),
-                        child: addimage3 == null
+                        child: image3 == null
                             ? Icon(
                                 Icons.add,
                                 color: Colors.red,
@@ -163,7 +163,7 @@ class _AddYourPhotosState extends State<AddYourPhotos> {
                         XFile? image = await ImagePicker()
                             .pickImage(source: ImageSource.gallery);
                         setState(() {
-                          addimage4 = image;
+                          image4 = image;
                         });
                       },
                       child: Container(
@@ -171,12 +171,12 @@ class _AddYourPhotosState extends State<AddYourPhotos> {
                             image: DecorationImage(
                                 image: FileImage(
                                   File(
-                                    addimage4?.path ?? '',
+                                    image4?.path ?? '',
                                   ),
                                 ),
                                 fit: BoxFit.cover),
                             color: Color.fromARGB(255, 252, 184, 179)),
-                        child: addimage4 == null
+                        child: image4 == null
                             ? Icon(
                                 Icons.add,
                                 color: Colors.red,
@@ -197,14 +197,14 @@ class _AddYourPhotosState extends State<AddYourPhotos> {
                     setState(() {
                       loading = true;
                     });
-                    if (addimage1 != null &&
-                        addimage2 != null &&
-                        addimage3 != null &&
-                        addimage4 != null) {
-                      image1 = await postPhoto(addimage1?.path);
-                      image2 = await postPhoto(addimage2?.path);
-                      image3 = await postPhoto(addimage3?.path);
-                      image4 = await postPhoto(addimage4?.path);
+                    if (image1 != null &&
+                        image2 != null &&
+                        image3 != null &&
+                        image4 != null) {
+                      // image1 = await postPhoto(image1?.path);
+                      // image2 = await postPhoto(image2?.path);
+                      // image3 = await postPhoto(image3?.path);
+                      // image4 = await postPhoto(image4?.path);
                       // Get.to(const PassionsScreen(),
                       //     transition: Transition.rightToLeftWithFade);
                       customNavPush(context, PassionsScreen());

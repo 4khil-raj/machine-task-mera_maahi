@@ -14,9 +14,11 @@ import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
 import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/button.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/widgets/form_field.dart';
+import 'package:mere_maahi_dummy/application/user/userdetails_bloc.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({super.key});
+  final UserFetched state;
+  const EditProfile({super.key, required this.state});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -66,6 +68,12 @@ class _EditProfileState extends State<EditProfile> {
   XFile? selectedImage;
   @override
   Widget build(BuildContext context) {
+    _dobController.text = widget.state.model.user?.dob ?? '';
+    selectedImage = XFile(widget.state.model.user?.profilePic ?? '');
+    phonecontroller = widget.state.model.user?.phone;
+    namecontroller.text = '${widget.state.model.user?.firstName} ';
+    lastnamecontroller.text = '${widget.state.model.user?.lastName}';
+    // _selectedValue = widget.state.model.user?.gender;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -112,7 +120,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       Text(
-                        userAllDetails?.email ?? 'u***@gmail.com',
+                        widget.state.model.user?.email ?? 'u***@gmail.com',
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.w500),
                       )

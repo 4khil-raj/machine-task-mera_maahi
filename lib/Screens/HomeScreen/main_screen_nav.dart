@@ -14,7 +14,7 @@ class MainScreenNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    userId = FirebaseAuth.instance.currentUser!.email;
+    userId = FirebaseAuth.instance.currentUser?.email;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 237, 233, 233),
       body: SingleChildScrollView(

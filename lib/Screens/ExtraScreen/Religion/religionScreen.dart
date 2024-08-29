@@ -9,8 +9,8 @@ import 'package:mere_maahi_dummy/Screens/Passions/passions_screen.dart';
 import '../../../Widget/CustomImageViewer.dart';
 import '../../../core/utils/image_constant.dart';
 
-String? selectedReligion;
-String? selectedCommunity;
+String? signUpselectedReligion;
+String? signUpselectedCommunity;
 
 class DropdownScreen extends StatefulWidget {
   @override
@@ -37,10 +37,10 @@ class _DropdownScreenState extends State<DropdownScreen> {
   ];
 
   List<String> getCommunitiesForSelectedReligion() {
-    if (selectedReligion == null) {
+    if (signUpselectedReligion == null) {
       return [];
     }
-    int index = religions.indexOf(selectedReligion!);
+    int index = religions.indexOf(signUpselectedReligion!);
     return communities[index];
   }
 
@@ -95,11 +95,11 @@ class _DropdownScreenState extends State<DropdownScreen> {
                     underline: SizedBox(),
                     isExpanded: true,
                     hint: Text('Select Religion'),
-                    value: selectedReligion,
+                    value: signUpselectedReligion,
                     onChanged: (value) {
                       setState(() {
-                        selectedReligion = value;
-                        selectedCommunity =
+                        signUpselectedReligion = value;
+                        signUpselectedCommunity =
                             null; // Reset community when religion changes
                       });
                     },
@@ -113,7 +113,7 @@ class _DropdownScreenState extends State<DropdownScreen> {
                 ),
               ),
             ),
-            selectedReligion != null
+            signUpselectedReligion != null
                 ? Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Container(
@@ -124,10 +124,10 @@ class _DropdownScreenState extends State<DropdownScreen> {
                           underline: SizedBox(),
                           hint: Text('Select Community'),
                           isExpanded: true,
-                          value: selectedCommunity,
+                          value: signUpselectedCommunity,
                           onChanged: (value) {
                             setState(() {
-                              selectedCommunity = value;
+                              signUpselectedCommunity = value;
                             });
                           },
                           items: getCommunitiesForSelectedReligion()
@@ -148,10 +148,11 @@ class _DropdownScreenState extends State<DropdownScreen> {
             Center(
               child: InkWell(
                 onTap: () {
-                  if (selectedReligion != null && selectedCommunity != null) {
+                  if (signUpselectedReligion != null &&
+                      signUpselectedCommunity != null) {
                     // Get.to(const RelationShip(),
                     //     transition: Transition.rightToLeftWithFade);
-                    customNavPush(context, RelationShip());
+                    customNavPush(context, const RelationShip());
                   }
                 },
                 child: Container(

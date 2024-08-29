@@ -74,14 +74,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: TextFormField(
                   decoration: InputDecoration(
                     prefixIcon: Container(
-                      margin: const EdgeInsets.fromLTRB(20, 14, 11, 14),
-                      child: CustomImageView(
-                        color: Colors.black,
-                        imagePath: ImageConstant.imgSearch,
-                        height: 20,
-                        width: 20,
-                      ),
-                    ),
+                        margin: const EdgeInsets.fromLTRB(20, 14, 11, 14),
+                        child: Container()),
                     prefixIconConstraints: const BoxConstraints(maxHeight: 48),
                     suffixIcon: Padding(
                       padding: const EdgeInsets.only(right: 15),
@@ -157,7 +151,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildUserListItem(
       Map<String, dynamic> userData, BuildContext context) {
-    if (userData['email'] != userId) {
+    if (userData['email'] != 'fg') {
       return UserTile(
         text: userData['username'],
         profile: userData['userProfile'],

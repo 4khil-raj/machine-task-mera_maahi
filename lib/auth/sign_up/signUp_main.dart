@@ -2,9 +2,9 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
 // import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
@@ -85,8 +85,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    // Get.to(const PhoneNumberScreen(),
-                    //     transition: Transition.downToUp);
                     customNavPush(context, PhoneNumberScreen());
                   },
                   child: Container(
@@ -194,7 +192,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           //               side: const BorderSide(
                           //                   width: 1,
                           //                   color:
-                          //                       Color.fromARGB(255, 255, 0, 0)),
+                          //                       Color.fromARGB(255, 255, 0, 0)
+                          // ),
                           //               borderRadius:
                           //                   BorderRadius.circular(10))),
                           //       child: IconButton(

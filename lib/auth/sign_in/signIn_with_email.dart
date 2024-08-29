@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 import 'package:mere_maahi_dummy/Firebase/currentuser_repo.dart';
@@ -7,7 +6,7 @@ import 'package:mere_maahi_dummy/Screens/ChatScreen/push.dart';
 import 'package:mere_maahi_dummy/Screens/Main/MainScreen.dart';
 import 'package:mere_maahi_dummy/Screens/forgotPassword/forgotPassword_screen.dart';
 import 'package:mere_maahi_dummy/auth/sign_up/signUp_with_email.dart';
-
+import 'package:mere_maahi_dummy/infrastructure/repo/register/login.dart';
 import '../../Const/Style.dart';
 import '../../Const/const.dart';
 import '../../Const/theme.dart';
@@ -229,12 +228,13 @@ class _SignInScreenState extends State<SignInScreen> {
   InkWell buildLogInButton(BuildContext context) {
     return InkWell(
       onTap: () => setState(() {
+        LogIn(context);
+
         _isLoading = true;
         Future<void>.delayed(const Duration(seconds: 3), () {
           setState(() {
             _isLoading = false;
           });
-          LogIn(context);
         });
       }),
       child: _isLoading
@@ -261,40 +261,14 @@ class _SignInScreenState extends State<SignInScreen> {
   void LogIn(context) async {
     String email = _emailTextController.text;
     String password = _passwordTextController.text;
-    FirebaseAuth _auth = FirebaseAuth.instance;
-    try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+    await LoginRepo.loginReq(email, password, context);
 
-      if (userCredential.user != null) {
-        await CurrentUserRepo().fetchuserdatas();
-        showSnackBar(context, "User is successfully logged in");
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (home) => const MainScreen()),
-            (route) => false);
-      } else {
-        showSnackBar(context, "Some error happened in Log In");
-      }
-    } on FirebaseAuthException catch (e) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Text(e.message.toString()),
-            actions: [
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('ok'))
-            ],
-          );
-        },
-      );
-    }
+    FirebaseAuth _auth = FirebaseAuth.instance;
+
+    UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
   void showSnackBar(BuildContext context, String message) {
@@ -321,7 +295,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             TextButton(
               onPressed: () {
-                customNavPush(context, SignUpWithEmail());
+                customNavPush(context, const SignUpWithEmail());
 
                 // Navigator.push(
                 //     context,
@@ -346,9 +320,9 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 }
 
-class IsObscureAction {
-  @override
-  String toString() {
-    return 'IsObscureAction{}';
-  }
-}
+// class IsObscureAction {
+//   @override
+//   String toString() {
+//     return 'IsObscureAction{}';
+//   }
+// }

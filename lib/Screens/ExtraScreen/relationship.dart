@@ -7,7 +7,7 @@ import 'package:mere_maahi_dummy/Screens/Passions/passions_screen.dart';
 import 'package:mere_maahi_dummy/Widget/CustomImageViewer.dart';
 import 'package:mere_maahi_dummy/core/utils/image_constant.dart';
 
-String? relationShip;
+String? signUprelationShip;
 
 class RelationShip extends StatefulWidget {
   const RelationShip({super.key});
@@ -85,11 +85,11 @@ class _RelationShipState extends State<RelationShip> {
             //           child: DropdownButtonHideUnderline(
             //             child: DropdownButton<String>(
             //               hint: const Text('Choose '),
-            //               value: relationShip,
+            //               value: signUprelationShip,
             //               items: dropdownItems,
             //               onChanged: (String? newValue) {
             //                 setState(() {
-            //                   relationShip = newValue;
+            //                   signUprelationShip = newValue;
             //                 });
             //               },
             //             ),
@@ -104,10 +104,10 @@ class _RelationShipState extends State<RelationShip> {
             Center(
               child: InkWell(
                 onTap: () {
-                  if (relationShip != null) {
+                  if (signUprelationShip != null) {
                     // Get.to(const SelectContry(),
                     //     transition: Transition.rightToLeftWithFade);
-                    customNavPush(context, SelectContry());
+                    customNavPush(context, const SelectContry());
                   }
                   // Navigator.pushAndRemoveUntil(
                   //     context,
@@ -156,10 +156,10 @@ class _RelationShipState extends State<RelationShip> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'Single',
-                isSelected: relationShip == 'Single',
+                isSelected: signUprelationShip == 'Single',
                 onSelect: () {
                   setState(() {
-                    relationShip = 'Single';
+                    signUprelationShip = 'Single';
                   });
                 },
               ),
@@ -167,10 +167,10 @@ class _RelationShipState extends State<RelationShip> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'Committed',
-                isSelected: relationShip == 'Committed',
+                isSelected: signUprelationShip == 'Committed',
                 onSelect: () {
                   setState(() {
-                    relationShip = 'Committed';
+                    signUprelationShip = 'Committed';
                   });
                 },
               ),
@@ -183,10 +183,10 @@ class _RelationShipState extends State<RelationShip> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'Engaged',
-                isSelected: relationShip == 'Engaged',
+                isSelected: signUprelationShip == 'Engaged',
                 onSelect: () {
                   setState(() {
-                    relationShip = 'Engaged';
+                    signUprelationShip = 'Engaged';
                   });
                 },
               ),
@@ -194,10 +194,10 @@ class _RelationShipState extends State<RelationShip> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'Married',
-                isSelected: relationShip == 'Married',
+                isSelected: signUprelationShip == 'Married',
                 onSelect: () {
                   setState(() {
-                    relationShip = 'Married';
+                    signUprelationShip = 'Married';
                   });
                 },
               ),
@@ -210,10 +210,10 @@ class _RelationShipState extends State<RelationShip> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'Divorced',
-                isSelected: relationShip == 'Divorced',
+                isSelected: signUprelationShip == 'Divorced',
                 onSelect: () {
                   setState(() {
-                    relationShip = 'Divorced';
+                    signUprelationShip = 'Divorced';
                   });
                 },
               ),
@@ -221,10 +221,10 @@ class _RelationShipState extends State<RelationShip> {
             Expanded(
               child: PassionschipviewItemWidget(
                 label: 'Widowed',
-                isSelected: relationShip == 'Widowed',
+                isSelected: signUprelationShip == 'Widowed',
                 onSelect: () {
                   setState(() {
-                    relationShip = 'Widowed';
+                    signUprelationShip = 'Widowed';
                   });
                 },
               ),

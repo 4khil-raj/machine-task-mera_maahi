@@ -19,7 +19,7 @@ class InputStyle {
           borderSide: const BorderSide(color: MyTheme.app_accent_color)),
       isDense: true,
       hintText: hint,
-      hintStyle: TextStyle(fontSize: 14,color: MyTheme.light_grey),
+      hintStyle: TextStyle(fontSize: 14, color: MyTheme.light_grey),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -39,7 +39,7 @@ class InputStyle {
       ),
       focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color:Colors.transparent)),
+          borderSide: const BorderSide(color: Colors.transparent)),
 
       isDense: true,
       contentPadding: const EdgeInsets.symmetric(horizontal: 8),

@@ -16,7 +16,6 @@ class ImageConstant {
   static String facebookImg = '$imagePath/facebook.svg';
   static String googleImg = '$imagePath/google.svg';
 
-
   static String imgGoogle = '$imagePath/img_google.svg';
 
   static String imgIcon = '$imagePath/icon.png';

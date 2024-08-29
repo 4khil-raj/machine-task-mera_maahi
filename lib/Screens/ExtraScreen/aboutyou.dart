@@ -73,8 +73,8 @@ class _AboutYouState extends State<AboutYou> {
                 if (aboutyouController.text.isNotEmpty) {
                   // Get.to(const AddYourPhotos(),
                   // transition: Transition.rightToLeftWithFade);
-                  customNavPush(context, AddYourPhotos());
-                  await updateAbout();
+                  customNavPush(context, const AddYourPhotos());
+                  // await updateAbout();
                   CurrentUserRepo().fetchuserdatas();
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -117,12 +117,12 @@ class _AboutYouState extends State<AboutYou> {
     );
   }
 
-  Future<void> updateAbout() async {
-    FirebaseFirestore.instance
-        .collection('userDetails')
-        .doc(userAllDetails?.uid)
-        .update({'about': aboutyouController.text});
-  }
+  // Future<void> updateAbout() async {
+  //   FirebaseFirestore.instance
+  //       .collection('userDetails')
+  //       .doc(userAllDetails?.uid)
+  //       .update({'about': aboutyouController.text});
+  // }
 
   PreferredSizeWidget buildAppBar() {
     return AppBar(
